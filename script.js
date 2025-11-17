@@ -662,7 +662,7 @@ function initEmailJS() {
             // Show loading state with error checking
             const buttonText = sendButton.querySelector('.button-text');
             const buttonLoading = sendButton.querySelector('.button-loading');
-            
+
             if (buttonText && buttonLoading) {
                 buttonText.style.display = 'none';
                 buttonLoading.style.display = 'inline-block';
@@ -684,6 +684,8 @@ function initEmailJS() {
 
             // Debug: Log the parameters being sent
             console.log('Sending email with params:', templateParams);
+            console.log('Using Service ID: service_0e2j15o');
+            console.log('Using Template ID: template_fhkn6hc');
 
             // Send email using your EmailJS service
             emailjs.send('service_0e2j15o', 'template_fhkn6hc', templateParams)

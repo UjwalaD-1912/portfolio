@@ -633,8 +633,8 @@ function initProfileImage() {
 
 // Email functionality using EmailJS
 function initEmailJS() {
-    // Initialize EmailJS with your public key
-    emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+    // Initialize EmailJS with public key
+    emailjs.init("wMGWVOLHgUZzKT7mO"); // Public key for EmailJS
     
     const contactForm = document.getElementById('contactForm');
     const sendButton = document.getElementById('sendButton');
@@ -643,6 +643,22 @@ function initEmailJS() {
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Validate form
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !subject || !message) {
+                showFormMessage('❌ Please fill in all fields.', 'error');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showFormMessage('❌ Please enter a valid email address.', 'error');
+                return;
+            }
             
             // Show loading state
             const buttonText = sendButton.querySelector('.button-text');
@@ -653,22 +669,23 @@ function initEmailJS() {
             
             // Get form data
             const templateParams = {
-                from_name: document.getElementById('name').value,
-                from_email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value,
-                to_email: 'ujwaladndu@gmail.com' // Your email address
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: 'ujwaladndu@gmail.com',
+                reply_to: email
             };
             
             // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send('service_portfolio', 'template_contact', templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully!', response.status, response.text);
                     showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
                     contactForm.reset();
                 }, function(error) {
                     console.log('Email failed to send:', error);
-                    showFormMessage('❌ Sorry, there was an error sending your message. Please try again or contact me directly at ujwaladndu@gmail.com', 'error');
+                    showFormMessage('❌ Sorry, there was an error sending your message. Please try the contact information above or email me directly at ujwaladndu@gmail.com', 'error');
                 })
                 .finally(function() {
                     // Reset button state
@@ -787,8 +804,8 @@ function showFormMessage(message, type) {
     }
 }
 
-// Initialize the contact form with fallback method
+// Initialize the contact form with EmailJS
 document.addEventListener('DOMContentLoaded', function() {
-    // Use the simple mailto fallback for now - most reliable
-    initMailtoFallback();
+    // Use EmailJS for direct email sending
+    initEmailJS();
 });

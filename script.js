@@ -635,37 +635,37 @@ function initProfileImage() {
 function initEmailJS() {
     // Initialize EmailJS with your public key
     emailjs.init("n-iXT72loogbzOrZG");
-    
+
     const contactForm = document.getElementById('contactForm');
     const sendButton = document.getElementById('sendButton');
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Validate form
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const subject = document.getElementById('subject').value.trim();
             const message = document.getElementById('message').value.trim();
-            
+
             if (!name || !email || !subject || !message) {
                 showFormMessage('❌ Please fill in all fields.', 'error');
                 return;
             }
-            
+
             if (!isValidEmail(email)) {
                 showFormMessage('❌ Please enter a valid email address.', 'error');
                 return;
             }
-            
+
             // Show loading state
             const buttonText = sendButton.querySelector('.button-text');
             const buttonLoading = sendButton.querySelector('.button-loading');
             buttonText.style.display = 'none';
             buttonLoading.style.display = 'inline-block';
             sendButton.disabled = true;
-            
+
             // Email template parameters
             const templateParams = {
                 from_name: name,
@@ -675,18 +675,26 @@ function initEmailJS() {
                 message: message,
                 reply_to: email
             };
-            
+
+            // Debug: Log the parameters being sent
+            console.log('Sending email with params:', templateParams);
+
             // Send email using your EmailJS service
             emailjs.send('service_0e2j15o', 'template_contact', templateParams)
-                .then(function(response) {
-                    console.log('Email sent successfully!', response.status, response.text);
+                .then(function (response) {
+                    console.log('✅ Email sent successfully!', response.status, response.text);
                     showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
                     contactForm.reset();
-                }, function(error) {
-                    console.log('Email failed to send:', error);
-                    showFormMessage('❌ Sorry, there was an error sending your message. Please try again or contact me directly at ujwaladndu@gmail.com', 'error');
+                }, function (error) {
+                    console.error('❌ Email failed to send:', error);
+                    console.error('Error details:', {
+                        status: error.status,
+                        text: error.text,
+                        message: error.message
+                    });
+                    showFormMessage('❌ Sorry, there was an error sending your message. Error: ' + (error.text || error.message || 'Unknown error'), 'error');
                 })
-                .finally(function() {
+                .finally(function () {
                     // Reset button state
                     buttonText.style.display = 'inline-block';
                     buttonLoading.style.display = 'none';
@@ -700,25 +708,25 @@ function initEmailJS() {
 function initFormspree() {
     const contactForm = document.getElementById('contactForm');
     const sendButton = document.getElementById('sendButton');
-    
+
     if (contactForm) {
         // Update form action to use Formspree
         contactForm.action = 'https://formspree.io/f/YOUR_FORMSPREE_ID'; // You'll need to replace this
         contactForm.method = 'POST';
-        
-        contactForm.addEventListener('submit', function(e) {
+
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Show loading state
             const buttonText = sendButton.querySelector('.button-text');
             const buttonLoading = sendButton.querySelector('.button-loading');
             buttonText.style.display = 'none';
             buttonLoading.style.display = 'inline-block';
             sendButton.disabled = true;
-            
+
             // Create form data
             const formData = new FormData(contactForm);
-            
+
             // Send to Formspree
             fetch(contactForm.action, {
                 method: 'POST',
@@ -727,30 +735,30 @@ function initFormspree() {
                     'Accept': 'application/json'
                 }
             })
-            .then(response => {
-                if (response.ok) {
-                    showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
-                    contactForm.reset();
-                } else {
-                    response.json().then(data => {
-                        if (Object.hasOwnProperty.call(data, 'errors')) {
-                            showFormMessage('❌ ' + data["errors"].map(error => error["message"]).join(", "), 'error');
-                        } else {
-                            showFormMessage('❌ Sorry, there was an error sending your message. Please try again.', 'error');
-                        }
-                    });
-                }
-            })
-            .catch(error => {
-                console.log('Error:', error);
-                showFormMessage('❌ Sorry, there was an error sending your message. Please contact me directly at ujwaladndu@gmail.com', 'error');
-            })
-            .finally(() => {
-                // Reset button state
-                buttonText.style.display = 'inline-block';
-                buttonLoading.style.display = 'none';
-                sendButton.disabled = false;
-            });
+                .then(response => {
+                    if (response.ok) {
+                        showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
+                        contactForm.reset();
+                    } else {
+                        response.json().then(data => {
+                            if (Object.hasOwnProperty.call(data, 'errors')) {
+                                showFormMessage('❌ ' + data["errors"].map(error => error["message"]).join(", "), 'error');
+                            } else {
+                                showFormMessage('❌ Sorry, there was an error sending your message. Please try again.', 'error');
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.log('Error:', error);
+                    showFormMessage('❌ Sorry, there was an error sending your message. Please contact me directly at ujwaladndu@gmail.com', 'error');
+                })
+                .finally(() => {
+                    // Reset button state
+                    buttonText.style.display = 'inline-block';
+                    buttonLoading.style.display = 'none';
+                    sendButton.disabled = false;
+                });
         });
     }
 }
@@ -759,30 +767,30 @@ function initFormspree() {
 function initMailtoFallback() {
     const contactForm = document.getElementById('contactForm');
     const sendButton = document.getElementById('sendButton');
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
-            
+
             // Validate form
             if (!name || !email || !subject || !message) {
                 showFormMessage('❌ Please fill in all fields.', 'error');
                 return;
             }
-            
+
             // Create mailto link
             const emailSubject = encodeURIComponent(`Portfolio Contact: ${subject}`);
             const emailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
             const mailtoLink = `mailto:ujwaladndu@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-            
+
             // Open email client
             window.location.href = mailtoLink;
-            
+
             showFormMessage('📧 Opening your email client. If it doesn\'t open automatically, please contact me directly at ujwaladndu@gmail.com', 'info');
         });
     }
@@ -795,7 +803,7 @@ function showFormMessage(message, type) {
         formMessage.innerHTML = message;
         formMessage.className = `form-message ${type}`;
         formMessage.style.display = 'block';
-        
+
         // Hide message after 5 seconds
         setTimeout(() => {
             formMessage.style.display = 'none';
@@ -804,7 +812,7 @@ function showFormMessage(message, type) {
 }
 
 // Initialize the contact form with EmailJS
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Use EmailJS with your service
     initEmailJS();
 });

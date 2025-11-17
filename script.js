@@ -686,7 +686,7 @@ function initEmailJS() {
             console.log('Sending email with params:', templateParams);
 
             // Send email using your EmailJS service
-            emailjs.send('service_0e2j15o', 'template_contact', templateParams)
+            emailjs.send('service_0e2j15o', 'template_fhkn6hc', templateParams)
                 .then(function (response) {
                     console.log('✅ Email sent successfully!', response.status, response.text);
                     showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');

@@ -659,11 +659,17 @@ function initEmailJS() {
                 return;
             }
 
-            // Show loading state
+            // Show loading state with error checking
             const buttonText = sendButton.querySelector('.button-text');
             const buttonLoading = sendButton.querySelector('.button-loading');
-            buttonText.style.display = 'none';
-            buttonLoading.style.display = 'inline-block';
+            
+            if (buttonText && buttonLoading) {
+                buttonText.style.display = 'none';
+                buttonLoading.style.display = 'inline-block';
+            } else {
+                // Fallback: just change button text
+                sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            }
             sendButton.disabled = true;
 
             // Email template parameters
@@ -696,8 +702,13 @@ function initEmailJS() {
                 })
                 .finally(function () {
                     // Reset button state
-                    buttonText.style.display = 'inline-block';
-                    buttonLoading.style.display = 'none';
+                    if (buttonText && buttonLoading) {
+                        buttonText.style.display = 'inline-block';
+                        buttonLoading.style.display = 'none';
+                    } else {
+                        // Fallback: reset button text
+                        sendButton.innerHTML = '<span class="button-text">Send Message</span>';
+                    }
                     sendButton.disabled = false;
                 });
         });

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Test - Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #2d3436, #636e72);
+            color: white;
+            min-height: 100vh;
+        }
+        .theme-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .current-theme {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+        }
+        .theme-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .theme-name {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .time-range {
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+        .theme-description {
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+        .test-button {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        .test-button:hover {
+            background: #a29bfe;
+            transform: translateY(-2px);
+        }
+        .current-time {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(116, 185, 255, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌅 Portfolio Theme System Test</h1>
+    
+    <div class="current-time">
+        <div>Current Time: <span id="currentTime"></span></div>
+        <div>Active Theme: <span id="activeTheme"></span></div>
+    </div>
+
+    <div class="theme-container current-theme" id="current-theme">
+        <div class="theme-info">
+            <div class="theme-name">Current Theme</div>
+            <div class="time-range">Auto-detected</div>
+        </div>
+        <div class="theme-description" id="current-description">
+            This is the currently active theme based on your system time.
+        </div>
+    </div>
+
+    <div class="theme-container">
+        <div class="theme-info">
+            <div class="theme-name">🌅 Sunrise</div>
+            <div class="time-range">6:00 AM - 8:00 AM</div>
+        </div>
+        <div class="theme-description">
+            Warm golden and pink gradients with gentle stars fading out. Perfect for early morning productivity.
+        </div>
+        <button class="test-button" onclick="testTheme('sunrise')">Test Sunrise</button>
+    </div>
+
+    <div class="theme-container">
+        <div class="theme-info">
+            <div class="theme-name">🌤️ Morning</div>
+            <div class="time-range">8:00 AM - 12:00 PM</div>
+        </div>
+        <div class="theme-description">
+            Bright blue skies with floating clouds. Energetic and professional atmosphere for work.
+        </div>
+        <button class="test-button" onclick="testTheme('morning')">Test Morning</button>
+    </div>
+
+    <div class="theme-container">
+        <div class="theme-info">
+            <div class="theme-name">☀️ Afternoon</div>
+            <div class="time-range">12:00 PM - 5:00 PM</div>
+        </div>
+        <div class="theme-description">
+            Warm yellow and orange tones with a bright sun high in the sky. Peak daylight energy.
+        </div>
+        <button class="test-button" onclick="testTheme('afternoon')">Test Afternoon</button>
+    </div>
+
+    <div class="theme-container">
+        <div class="theme-info">
+            <div class="theme-name">🌅 Sunset</div>
+            <div class="time-range">5:00 PM - 7:30 PM</div>
+        </div>
+        <div class="theme-description">
+            Beautiful pink and purple gradients with a low sun. Romantic and creative atmosphere.
+        </div>
+        <button class="test-button" onclick="testTheme('sunset')">Test Sunset</button>
+    </div>
+
+    <div class="theme-container">
+        <div class="theme-info">
+            <div class="theme-name">🌆 Dusk</div>
+            <div class="time-range">7:30 PM - 10:00 PM</div>
+        </div>
+        <div class="theme-description">
+            Deep purple transitioning to dark with early stars appearing. Peaceful evening vibes.
+        </div>
+        <button class="test-button" onclick="testTheme('dusk')">Test Dusk</button>
+    </div>
+
+    <div class="theme-container">
+        <div class="theme-info">
+            <div class="theme-name">🌙 Night</div>
+            <div class="time-range">10:00 PM - 6:00 AM</div>
+        </div>
+        <div class="theme-description">
+            Deep dark gradients with bright moon, twinkling stars, and shooting stars. Serene nighttime atmosphere.
+        </div>
+        <button class="test-button" onclick="testTheme('night')">Test Night</button>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center;">
+        <button class="test-button" onclick="window.location.href='index.html'">🏠 Back to Portfolio</button>
+        <button class="test-button" onclick="location.reload()">🔄 Reset to Current Time</button>
+    </div>
+
+    <script>
+        function updateCurrentTime() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const currentTime = currentHour + (currentMinutes / 60);
+            
+            // Determine theme based on realistic sun cycle
+            let theme;
+            if (currentTime >= 6 && currentTime < 8) {
+                theme = 'sunrise';
+            } else if (currentTime >= 8 && currentTime < 12) {
+                theme = 'morning';
+            } else if (currentTime >= 12 && currentTime < 17) {
+                theme = 'afternoon';
+            } else if (currentTime >= 17 && currentTime < 19.5) {
+                theme = 'sunset';
+            } else if (currentTime >= 19.5 && currentTime < 22) {
+                theme = 'dusk';
+            } else {
+                theme = 'night';
+            }
+
+            document.getElementById('currentTime').textContent = 
+                `${currentHour}:${currentMinutes.toString().padStart(2, '0')}`;
+            document.getElementById('activeTheme').textContent = 
+                theme.charAt(0).toUpperCase() + theme.slice(1);
+
+            const descriptions = {
+                sunrise: 'Perfect time for fresh starts and new ideas!',
+                morning: 'Peak productivity hours - time to tackle big tasks!',
+                afternoon: 'Steady work time with maximum daylight energy.',
+                sunset: 'Winding down with beautiful atmospheric lighting.',
+                dusk: 'Peaceful transition time, great for reflection.',
+                night: 'Quiet focus time with minimal distractions.'
+            };
+
+            document.getElementById('current-description').textContent = descriptions[theme];
+        }
+
+        function testTheme(themeName) {
+            // Open portfolio with theme override in session storage
+            sessionStorage.setItem('themeOverride', themeName);
+            window.open('index.html', '_blank');
+        }
+
+        // Update time every second
+        updateCurrentTime();
+        setInterval(updateCurrentTime, 1000);
+    </script>
+</body>
+</html>

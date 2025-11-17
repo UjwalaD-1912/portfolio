@@ -35,20 +35,32 @@ function initDynamicTheme() {
     const currentMinutes = new Date().getMinutes();
     const currentTime = currentHour + (currentMinutes / 60);
     
-    // Determine theme based on realistic sun cycle
+    // Check for theme override (for testing)
+    const themeOverride = sessionStorage.getItem('themeOverride');
+    
     let theme;
-    if (currentTime >= 6 && currentTime < 8) {
-        theme = 'sunrise';  // 6 AM - 8 AM: Sunrise
-    } else if (currentTime >= 8 && currentTime < 12) {
-        theme = 'morning';  // 8 AM - 12 PM: Morning
-    } else if (currentTime >= 12 && currentTime < 17) {
-        theme = 'afternoon'; // 12 PM - 5 PM: Afternoon
-    } else if (currentTime >= 17 && currentTime < 19.5) {
-        theme = 'sunset';   // 5 PM - 7:30 PM: Sunset
-    } else if (currentTime >= 19.5 && currentTime < 22) {
-        theme = 'dusk';     // 7:30 PM - 10 PM: Dusk
+    if (themeOverride && ['sunrise', 'morning', 'afternoon', 'sunset', 'dusk', 'night'].includes(themeOverride)) {
+        theme = themeOverride;
+        // Clear override after use
+        sessionStorage.removeItem('themeOverride');
+        console.log(`🧪 Theme Override: ${theme.charAt(0).toUpperCase() + theme.slice(1)}`);
     } else {
-        theme = 'night';    // 10 PM - 6 AM: Night with moon
+        // Determine theme based on realistic sun cycle
+        if (currentTime >= 6 && currentTime < 8) {
+            theme = 'sunrise';  // 6 AM - 8 AM: Sunrise
+        } else if (currentTime >= 8 && currentTime < 12) {
+            theme = 'morning';  // 8 AM - 12 PM: Morning
+        } else if (currentTime >= 12 && currentTime < 17) {
+            theme = 'afternoon'; // 12 PM - 5 PM: Afternoon
+        } else if (currentTime >= 17 && currentTime < 19.5) {
+            theme = 'sunset';   // 5 PM - 7:30 PM: Sunset
+        } else if (currentTime >= 19.5 && currentTime < 22) {
+            theme = 'dusk';     // 7:30 PM - 10 PM: Dusk
+        } else {
+            theme = 'night';    // 10 PM - 6 AM: Night with moon
+        }
+        
+        console.log(`🌅 Portfolio Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)} (${currentHour}:${currentMinutes.toString().padStart(2, '0')})`);
     }
     
     // Apply the theme
@@ -56,9 +68,6 @@ function initDynamicTheme() {
     
     // Update theme colors in CSS variables
     updateThemeColors(theme);
-    
-    // Log current theme for debugging
-    console.log(`🌅 Portfolio Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)} (${currentHour}:${currentMinutes.toString().padStart(2, '0')})`);
 }function applyTheme(theme) {
     const dynamicBackground = document.getElementById('dynamicBackground');
     const body = document.body;

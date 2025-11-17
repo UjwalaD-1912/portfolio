@@ -34,10 +34,10 @@ function initDynamicTheme() {
     const currentHour = new Date().getHours();
     const currentMinutes = new Date().getMinutes();
     const currentTime = currentHour + (currentMinutes / 60);
-    
+
     // Check for theme override (for testing)
     const themeOverride = sessionStorage.getItem('themeOverride');
-    
+
     let theme;
     if (themeOverride && ['sunrise', 'morning', 'afternoon', 'sunset', 'dusk', 'night'].includes(themeOverride)) {
         theme = themeOverride;
@@ -59,23 +59,23 @@ function initDynamicTheme() {
         } else {
             theme = 'night';    // 10 PM - 6 AM: Night with moon
         }
-        
+
         console.log(`🌅 Portfolio Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)} (${currentHour}:${currentMinutes.toString().padStart(2, '0')})`);
     }
-    
+
     // Apply the theme
     applyTheme(theme);
-    
+
     // Update theme colors in CSS variables
     updateThemeColors(theme);
-}function applyTheme(theme) {
+} function applyTheme(theme) {
     const dynamicBackground = document.getElementById('dynamicBackground');
     const body = document.body;
 
     // Remove existing theme classes
     dynamicBackground.className = 'dynamic-background';
-    body.classList.remove('theme-night', 'theme-dawn', 'theme-day', 'theme-sunset', 
-                          'theme-sunrise', 'theme-morning', 'theme-afternoon', 'theme-dusk');
+    body.classList.remove('theme-night', 'theme-dawn', 'theme-day', 'theme-sunset',
+        'theme-sunrise', 'theme-morning', 'theme-afternoon', 'theme-dusk');
 
     // Add new theme class
     dynamicBackground.classList.add(theme);
@@ -87,7 +87,7 @@ function initDynamicTheme() {
 
 function updateThemeColors(theme) {
     const root = document.documentElement;
-    
+
     const themes = {
         sunrise: {
             '--primary-bg': 'linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%)',
@@ -132,7 +132,7 @@ function updateThemeColors(theme) {
             '--particle-color': '#74b9ff'
         }
     };
-    
+
     const currentTheme = themes[theme];
     if (currentTheme) {
         Object.keys(currentTheme).forEach(property => {

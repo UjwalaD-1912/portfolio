@@ -109,9 +109,11 @@
             </div>
             <div class="hero-image">
                 <div class="hero-avatar">
-                    <img src="images/profile-photo.jpg" alt="Ujwala Dindi - Senior Salesforce Developer"
+                    <img src="images/EA0BB4A1-34AF-4D37-BFCD-976CFDB171B1_1_105_c.jpeg" alt="Ujwala Dindi - Senior Salesforce Developer"
                         class="profile-photo"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        loading="eager"
+                        onload="console.log('Profile photo loaded successfully')"
+                        onerror="console.log('Profile photo failed to load'); this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="avatar-fallback" style="display: none;">
                         <i class="fas fa-user"></i>
                         <span>UD</span>

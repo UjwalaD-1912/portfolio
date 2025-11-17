@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             color: white;
             min-height: 100vh;
         }
+
         .theme-container {
             background: rgba(0, 0, 0, 0.3);
             padding: 20px;
@@ -19,28 +21,34 @@
             margin: 20px 0;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .current-theme {
             background: rgba(255, 215, 0, 0.2);
             border: 2px solid #FFD700;
         }
+
         .theme-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
+
         .theme-name {
             font-size: 1.5em;
             font-weight: bold;
         }
+
         .time-range {
             font-size: 1.1em;
             opacity: 0.8;
         }
+
         .theme-description {
             margin-top: 10px;
             line-height: 1.6;
         }
+
         .test-button {
             background: #6c5ce7;
             color: white;
@@ -51,10 +59,12 @@
             margin: 5px;
             transition: all 0.3s ease;
         }
+
         .test-button:hover {
             background: #a29bfe;
             transform: translateY(-2px);
         }
+
         .current-time {
             text-align: center;
             font-size: 1.2em;
@@ -65,9 +75,10 @@
         }
     </style>
 </head>
+
 <body>
     <h1>🌅 Portfolio Theme System Test</h1>
-    
+
     <div class="current-time">
         <div>Current Time: <span id="currentTime"></span></div>
         <div>Active Theme: <span id="activeTheme"></span></div>
@@ -160,7 +171,7 @@
             const currentHour = now.getHours();
             const currentMinutes = now.getMinutes();
             const currentTime = currentHour + (currentMinutes / 60);
-            
+
             // Determine theme based on realistic sun cycle
             let theme;
             if (currentTime >= 6 && currentTime < 8) {
@@ -177,9 +188,9 @@
                 theme = 'night';
             }
 
-            document.getElementById('currentTime').textContent = 
+            document.getElementById('currentTime').textContent =
                 `${currentHour}:${currentMinutes.toString().padStart(2, '0')}`;
-            document.getElementById('activeTheme').textContent = 
+            document.getElementById('activeTheme').textContent =
                 theme.charAt(0).toUpperCase() + theme.slice(1);
 
             const descriptions = {
@@ -205,4 +216,5 @@
         setInterval(updateCurrentTime, 1000);
     </script>
 </body>
+
 </html>

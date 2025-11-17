@@ -2588,6 +2588,42 @@ body.theme-dawn .navbar.scrolled {
     min-height: 120px;
 }
 
+/* Form message styles */
+.form-message {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-medium);
+    display: none;
+}
+
+.form-message.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.form-message.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.form-message.info {
+    background-color: #cce7ff;
+    border: 1px solid #b3d9ff;
+    color: #004085;
+}
+
+/* Button loading state styles */
+.button-loading {
+    display: none;
+}
+
+.button-loading i {
+    margin-right: 0.5rem;
+}
+
 /* Footer */
 .footer {
     background: var(--sf-gray-8);

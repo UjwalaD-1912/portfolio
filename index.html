@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -109,9 +111,8 @@
             </div>
             <div class="hero-image">
                 <div class="hero-avatar">
-                    <img src="images/EA0BB4A1-34AF-4D37-BFCD-976CFDB171B1_1_105_c.jpeg" alt="Ujwala Dindi - Senior Salesforce Developer"
-                        class="profile-photo"
-                        loading="eager"
+                    <img src="images/EA0BB4A1-34AF-4D37-BFCD-976CFDB171B1_1_105_c.jpeg"
+                        alt="Ujwala Dindi - Senior Salesforce Developer" class="profile-photo" loading="eager"
                         onload="console.log('Profile photo loaded successfully')"
                         onerror="console.log('Profile photo failed to load'); this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="avatar-fallback" style="display: none;">
@@ -947,7 +948,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form id="contactForm">
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="Your Name" required>
                         </div>
@@ -961,7 +962,13 @@
                             <textarea id="message" name="message" placeholder="Your Message" rows="5"
                                 required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary" id="sendButton">
+                            <span class="button-text">Send Message</span>
+                            <span class="button-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </span>
+                        </button>
+                        <div id="formMessage" class="form-message"></div>
                     </form>
                 </div>
             </div>

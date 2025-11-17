@@ -630,3 +630,165 @@ function initProfileImage() {
         }
     });
 }
+
+// Email functionality using EmailJS
+function initEmailJS() {
+    // Initialize EmailJS with your public key
+    emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+    
+    const contactForm = document.getElementById('contactForm');
+    const sendButton = document.getElementById('sendButton');
+    const formMessage = document.getElementById('formMessage');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const buttonText = sendButton.querySelector('.button-text');
+            const buttonLoading = sendButton.querySelector('.button-loading');
+            buttonText.style.display = 'none';
+            buttonLoading.style.display = 'inline-block';
+            sendButton.disabled = true;
+            
+            // Get form data
+            const templateParams = {
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                to_email: 'ujwaladndu@gmail.com' // Your email address
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
+                    contactForm.reset();
+                }, function(error) {
+                    console.log('Email failed to send:', error);
+                    showFormMessage('❌ Sorry, there was an error sending your message. Please try again or contact me directly at ujwaladndu@gmail.com', 'error');
+                })
+                .finally(function() {
+                    // Reset button state
+                    buttonText.style.display = 'inline-block';
+                    buttonLoading.style.display = 'none';
+                    sendButton.disabled = false;
+                });
+        });
+    }
+}
+
+// Alternative method using Formspree (simpler setup)
+function initFormspree() {
+    const contactForm = document.getElementById('contactForm');
+    const sendButton = document.getElementById('sendButton');
+    
+    if (contactForm) {
+        // Update form action to use Formspree
+        contactForm.action = 'https://formspree.io/f/YOUR_FORMSPREE_ID'; // You'll need to replace this
+        contactForm.method = 'POST';
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const buttonText = sendButton.querySelector('.button-text');
+            const buttonLoading = sendButton.querySelector('.button-loading');
+            buttonText.style.display = 'none';
+            buttonLoading.style.display = 'inline-block';
+            sendButton.disabled = true;
+            
+            // Create form data
+            const formData = new FormData(contactForm);
+            
+            // Send to Formspree
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
+                    contactForm.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwnProperty.call(data, 'errors')) {
+                            showFormMessage('❌ ' + data["errors"].map(error => error["message"]).join(", "), 'error');
+                        } else {
+                            showFormMessage('❌ Sorry, there was an error sending your message. Please try again.', 'error');
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.log('Error:', error);
+                showFormMessage('❌ Sorry, there was an error sending your message. Please contact me directly at ujwaladndu@gmail.com', 'error');
+            })
+            .finally(() => {
+                // Reset button state
+                buttonText.style.display = 'inline-block';
+                buttonLoading.style.display = 'none';
+                sendButton.disabled = false;
+            });
+        });
+    }
+}
+
+// Simple fallback method using mailto
+function initMailtoFallback() {
+    const contactForm = document.getElementById('contactForm');
+    const sendButton = document.getElementById('sendButton');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Validate form
+            if (!name || !email || !subject || !message) {
+                showFormMessage('❌ Please fill in all fields.', 'error');
+                return;
+            }
+            
+            // Create mailto link
+            const emailSubject = encodeURIComponent(`Portfolio Contact: ${subject}`);
+            const emailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const mailtoLink = `mailto:ujwaladndu@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            showFormMessage('📧 Opening your email client. If it doesn\'t open automatically, please contact me directly at ujwaladndu@gmail.com', 'info');
+        });
+    }
+}
+
+// Show form message
+function showFormMessage(message, type) {
+    const formMessage = document.getElementById('formMessage');
+    if (formMessage) {
+        formMessage.innerHTML = message;
+        formMessage.className = `form-message ${type}`;
+        formMessage.style.display = 'block';
+        
+        // Hide message after 5 seconds
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
+    }
+}
+
+// Initialize the contact form with fallback method
+document.addEventListener('DOMContentLoaded', function() {
+    // Use the simple mailto fallback for now - most reliable
+    initMailtoFallback();
+});

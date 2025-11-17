@@ -10,7 +10,7 @@ A professional portfolio showcasing 8+ years of enterprise Salesforce developmen
 
 ## � About Me
 
-**Lead Salesforce Developer** with 8+ years of enterprise experience transforming business requirements into scalable Salesforce solutions. Currently leading platform enhancements at **BMO Canada** with expertise in:
+**Senior Salesforce Developer** with 8+ years of enterprise experience transforming business requirements into scalable Salesforce solutions. Currently leading platform enhancements at **BMO Canada** with expertise in:
 
 - 🏦 **Financial Services Cloud** implementations
 - ⚡ **Lightning Web Components** development  
@@ -42,7 +42,7 @@ A professional portfolio showcasing 8+ years of enterprise Salesforce developmen
 
 ## 🏢 Professional Experience
 
-### Current Role: Lead Salesforce Developer @ BMO Canada
+### Current Role: Senior Salesforce Developer @ BMO Canada
 *July 2025 - Present*
 - Leading Financial Services Cloud implementations with enterprise-scale impact
 - Developing Lightning Web Components with reusable, modular architecture

@@ -1,13 +1,13 @@
 {
-  "git.enableSmartCommit": true,
-  "git.confirmSync": false,
-  "git.autofetch": true,
-  "git.autofetchPeriod": 180,
-  "git.postCommitCommand": "push",
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 1000,
-  "editor.formatOnSave": true,
-  "html.format.enable": true,
-  "css.format.enable": true,
-  "javascript.format.enable": true
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.autofetchPeriod": 180,
+    "git.postCommitCommand": "push",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "editor.formatOnSave": true,
+    "html.format.enable": true,
+    "css.format.enable": true,
+    "javascript.format.enable": true
 }

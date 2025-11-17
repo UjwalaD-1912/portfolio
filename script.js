@@ -631,14 +631,13 @@ function initProfileImage() {
     });
 }
 
-// Email functionality using EmailJS
+// Email functionality using EmailJS with your service
 function initEmailJS() {
-    // Initialize EmailJS with public key
-    emailjs.init("wMGWVOLHgUZzKT7mO"); // Public key for EmailJS
+    // Initialize EmailJS with your public key
+    emailjs.init("n-iXT72loogbzOrZG");
     
     const contactForm = document.getElementById('contactForm');
     const sendButton = document.getElementById('sendButton');
-    const formMessage = document.getElementById('formMessage');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -667,25 +666,25 @@ function initEmailJS() {
             buttonLoading.style.display = 'inline-block';
             sendButton.disabled = true;
             
-            // Get form data
+            // Email template parameters
             const templateParams = {
                 from_name: name,
                 from_email: email,
+                to_name: 'Ujwala',
                 subject: subject,
                 message: message,
-                to_email: 'ujwaladndu@gmail.com',
                 reply_to: email
             };
             
-            // Send email using EmailJS
-            emailjs.send('service_portfolio', 'template_contact', templateParams)
+            // Send email using your EmailJS service
+            emailjs.send('service_0e2j15o', 'template_contact', templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully!', response.status, response.text);
                     showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');
                     contactForm.reset();
                 }, function(error) {
                     console.log('Email failed to send:', error);
-                    showFormMessage('❌ Sorry, there was an error sending your message. Please try the contact information above or email me directly at ujwaladndu@gmail.com', 'error');
+                    showFormMessage('❌ Sorry, there was an error sending your message. Please try again or contact me directly at ujwaladndu@gmail.com', 'error');
                 })
                 .finally(function() {
                     // Reset button state
@@ -806,6 +805,6 @@ function showFormMessage(message, type) {
 
 // Initialize the contact form with EmailJS
 document.addEventListener('DOMContentLoaded', function() {
-    // Use EmailJS for direct email sending
+    // Use EmailJS with your service
     initEmailJS();
 });

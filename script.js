@@ -828,4 +828,77 @@ function showFormMessage(message, type) {
 document.addEventListener('DOMContentLoaded', function () {
     // Use EmailJS with your service
     initEmailJS();
+    
+    // Initialize Salesforce cursor trail effect
+    initSalesforceCursorTrail();
 });
+
+// Salesforce Cloud Cursor Trail Effect
+function initSalesforceCursorTrail() {
+    let mouseX = 0;
+    let mouseY = 0;
+    let trailElements = [];
+    
+    // Track mouse movement
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Create trail effect every few pixels of movement
+        if (Math.random() > 0.7) { // 30% chance to create trail
+            createCursorTrail(mouseX, mouseY);
+        }
+    });
+    
+    function createCursorTrail(x, y) {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.style.left = x + 'px';
+        trail.style.top = y + 'px';
+        
+        // Add random cloud colors
+        const colors = [
+            'rgba(2, 124, 255, 0.6)',   // Salesforce blue
+            'rgba(0, 212, 255, 0.4)',   // Light blue
+            'rgba(108, 92, 231, 0.5)',  // Purple
+            'rgba(255, 107, 53, 0.4)'   // Orange
+        ];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        trail.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+        
+        document.body.appendChild(trail);
+        trailElements.push(trail);
+        
+        // Remove trail element after animation
+        setTimeout(() => {
+            if (trail.parentNode) {
+                trail.parentNode.removeChild(trail);
+            }
+            const index = trailElements.indexOf(trail);
+            if (index > -1) {
+                trailElements.splice(index, 1);
+            }
+        }, 800);
+        
+        // Limit number of trail elements
+        if (trailElements.length > 20) {
+            const oldTrail = trailElements.shift();
+            if (oldTrail.parentNode) {
+                oldTrail.parentNode.removeChild(oldTrail);
+            }
+        }
+    }
+    
+    // Special effects for hovering over Salesforce elements
+    const salesforceElements = document.querySelectorAll('.fab.fa-salesforce, .floating-element, .hero-avatar');
+    salesforceElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            // Create burst effect
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createCursorTrail(mouseX + (Math.random() - 0.5) * 30, mouseY + (Math.random() - 0.5) * 30);
+                }, i * 50);
+            }
+        });
+    });
+}

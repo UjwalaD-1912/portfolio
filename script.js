@@ -674,8 +674,8 @@ function initEmailJS() {
 
             // Email template parameters matching your template variables
             const templateParams = {
-                name: name,
-                email: email,
+                from_name: name,
+                from_email: email,
                 subject: subject,
                 message: message,
                 reply_to: email

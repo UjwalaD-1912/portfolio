@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .image-test {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid #1589EE;
+            object-fit: cover;
+            display: block;
+            margin: 20px auto;
+        }
+        .status {
+            text-align: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Profile Image Test</h1>
+        
+        <h2>Test 1: Direct Image Path</h2>
+        <img src="images/IMG_1935.jpeg" alt="Profile Photo Test" class="image-test" id="test1">
+        <div id="status1" class="status">Loading...</div>
+        
+        <h2>Test 2: File Information</h2>
+        <p><strong>Expected Path:</strong> images/IMG_1935.jpeg</p>
+        <p><strong>File Size:</strong> ~3.3MB (Large - may need optimization)</p>
+        
+        <h2>Recommendations</h2>
+        <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h3>If image is too large:</h3>
+            <ol>
+                <li>Resize to 400x400 pixels maximum</li>
+                <li>Compress using <a href="https://tinypng.com" target="_blank">TinyPNG</a></li>
+                <li>Rename to: <code>profile-photo.jpg</code></li>
+            </ol>
+        </div>
+        
+        <a href="index.html" style="display: inline-block; padding: 10px 20px; background: #1589EE; color: white; text-decoration: none; border-radius: 5px;">Back to Portfolio</a>
+    </div>
+
+    <script>
+        const img1 = document.getElementById('test1');
+        const status1 = document.getElementById('status1');
+        
+        img1.onload = function() {
+            status1.textContent = '✅ Image loaded successfully!';
+            status1.className = 'status success';
+        };
+        
+        img1.onerror = function() {
+            status1.textContent = '❌ Image failed to load. Check file path.';
+            status1.className = 'status error';
+        };
+        
+        // Check if already loaded
+        if (img1.complete) {
+            if (img1.naturalWidth === 0) {
+                img1.onerror();
+            } else {
+                img1.onload();
+            }
+        }
+    </script>
+</body>
+</html>

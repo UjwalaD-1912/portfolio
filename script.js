@@ -672,13 +672,14 @@ function initEmailJS() {
             }
             sendButton.disabled = true;
 
-            // Email template parameters matching your template variables
+            // Email template parameters matching your exact template variables
             const templateParams = {
-                from_name: name,
-                from_email: email,
-                subject: subject,
-                message: message,
-                reply_to: email
+                name: name,              // For {{name}} in template
+                from_name: name,         // For {{from_name}} in template
+                from_email: email,       // For {{from_email}} in template
+                subject: subject,        // For {{subject}} in template
+                message: message,        // For {{message}} in template
+                reply_to: email         // For {{reply_to}} in template
             };
 
             // Debug: Log the parameters being sent

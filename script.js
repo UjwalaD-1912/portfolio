@@ -672,11 +672,10 @@ function initEmailJS() {
             }
             sendButton.disabled = true;
 
-            // Email template parameters
+            // Email template parameters matching your template variables
             const templateParams = {
-                from_name: name,
-                from_email: email,
-                to_name: 'Ujwala',
+                name: name,
+                email: email,
                 subject: subject,
                 message: message,
                 reply_to: email
@@ -688,7 +687,7 @@ function initEmailJS() {
             console.log('Using Template ID: template_fhkn6hc');
 
             // Send email using your EmailJS service
-            emailjs.send('service_0e2j15o', 'template_fhkn6hc', templateParams)
+            emailjs.send('service_0e2j15o', 'portfolio_contact', templateParams)
                 .then(function (response) {
                     console.log('✅ Email sent successfully!', response.status, response.text);
                     showFormMessage('✅ Thank you for your message! I\'ll get back to you within 24 hours.', 'success');

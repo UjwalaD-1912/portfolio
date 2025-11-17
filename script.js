@@ -1,5 +1,8 @@
 // Salesforce Portfolio Interactive Features
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dynamic time-based theme
+    initDynamicTheme();
+    
     // Navigation functionality
     initNavigation();
     
@@ -24,6 +27,91 @@ document.addEventListener('DOMContentLoaded', function() {
     // Loading animations
     initLoadingAnimations();
 });
+
+// Dynamic Time-based Theme System
+function initDynamicTheme() {
+    const dynamicBackground = document.getElementById('dynamicBackground');
+    const currentHour = new Date().getHours();
+    
+    // Determine theme based on current time
+    let theme;
+    if (currentHour >= 5 && currentHour < 7) {
+        theme = 'dawn';
+    } else if (currentHour >= 7 && currentHour < 17) {
+        theme = 'day';
+    } else if (currentHour >= 17 && currentHour < 22) {
+        theme = 'sunset';
+    } else {
+        theme = 'night';
+    }
+    
+    // Apply the theme
+    applyTheme(theme);
+    
+    // Update theme colors in CSS variables
+    updateThemeColors(theme);
+    
+    // Log current theme for debugging
+    console.log(`🌅 Portfolio Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)} (${currentHour}:00)`);
+}
+
+function applyTheme(theme) {
+    const dynamicBackground = document.getElementById('dynamicBackground');
+    const body = document.body;
+    
+    // Remove existing theme classes
+    dynamicBackground.className = 'dynamic-background';
+    body.classList.remove('theme-night', 'theme-dawn', 'theme-day', 'theme-sunset');
+    
+    // Add new theme class
+    dynamicBackground.classList.add(theme);
+    body.classList.add(`theme-${theme}`);
+    
+    // Update document root classes for CSS targeting
+    document.documentElement.setAttribute('data-theme', theme);
+}
+
+function updateThemeColors(theme) {
+    const root = document.documentElement;
+    
+    // Map theme-specific colors to active CSS variables
+    const themes = {
+        night: {
+            'bg-primary': 'var(--night-bg-primary)',
+            'bg-secondary': 'var(--night-bg-secondary)',
+            'text-primary': 'var(--night-text-primary)',
+            'text-secondary': 'var(--night-text-secondary)',
+            'accent': 'var(--night-accent)'
+        },
+        dawn: {
+            'bg-primary': 'var(--dawn-bg-primary)',
+            'bg-secondary': 'var(--dawn-bg-secondary)',
+            'text-primary': 'var(--dawn-text-primary)',
+            'text-secondary': 'var(--dawn-text-secondary)',
+            'accent': 'var(--dawn-accent)'
+        },
+        day: {
+            'bg-primary': 'var(--day-bg-primary)',
+            'bg-secondary': 'var(--day-bg-secondary)',
+            'text-primary': 'var(--day-text-primary)',
+            'text-secondary': 'var(--day-text-secondary)',
+            'accent': 'var(--day-accent)'
+        },
+        sunset: {
+            'bg-primary': 'var(--sunset-bg-primary)',
+            'bg-secondary': 'var(--sunset-bg-secondary)',
+            'text-primary': 'var(--sunset-text-primary)',
+            'text-secondary': 'var(--sunset-text-secondary)',
+            'accent': 'var(--sunset-accent)'
+        }
+    };
+    
+    // Apply theme colors
+    const themeColors = themes[theme];
+    for (const [property, value] of Object.entries(themeColors)) {
+        root.style.setProperty(`--theme-${property}`, value);
+    }
+}
 
 // Navigation functionality
 function initNavigation() {

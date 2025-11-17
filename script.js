@@ -1,29 +1,29 @@
 // Salesforce Portfolio Interactive Features
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize dynamic time-based theme
     initDynamicTheme();
-    
+
     // Navigation functionality
     initNavigation();
-    
+
     // Scroll animations
     initScrollAnimations();
-    
+
     // Skill bar animations
     initSkillBars();
-    
+
     // Form handling
     initContactForm();
-    
+
     // Smooth scrolling for navigation links
     initSmoothScrolling();
-    
+
     // Typing animation for hero section
     initTypingAnimation();
-    
+
     // Parallax effects
     initParallaxEffects();
-    
+
     // Loading animations
     initLoadingAnimations();
 });
@@ -32,17 +32,23 @@ document.addEventListener('DOMContentLoaded', function() {
 function initDynamicTheme() {
     const dynamicBackground = document.getElementById('dynamicBackground');
     const currentHour = new Date().getHours();
+    const currentMinutes = new Date().getMinutes();
+    const currentTime = currentHour + (currentMinutes / 60);
     
-    // Determine theme based on current time
+    // Determine theme based on realistic sun cycle
     let theme;
-    if (currentHour >= 5 && currentHour < 7) {
-        theme = 'dawn';
-    } else if (currentHour >= 7 && currentHour < 17) {
-        theme = 'day';
-    } else if (currentHour >= 17 && currentHour < 22) {
-        theme = 'sunset';
+    if (currentTime >= 6 && currentTime < 8) {
+        theme = 'sunrise';  // 6 AM - 8 AM: Sunrise
+    } else if (currentTime >= 8 && currentTime < 12) {
+        theme = 'morning';  // 8 AM - 12 PM: Morning
+    } else if (currentTime >= 12 && currentTime < 17) {
+        theme = 'afternoon'; // 12 PM - 5 PM: Afternoon
+    } else if (currentTime >= 17 && currentTime < 19.5) {
+        theme = 'sunset';   // 5 PM - 7:30 PM: Sunset
+    } else if (currentTime >= 19.5 && currentTime < 22) {
+        theme = 'dusk';     // 7:30 PM - 10 PM: Dusk
     } else {
-        theme = 'night';
+        theme = 'night';    // 10 PM - 6 AM: Night with moon
     }
     
     // Apply the theme
@@ -52,21 +58,20 @@ function initDynamicTheme() {
     updateThemeColors(theme);
     
     // Log current theme for debugging
-    console.log(`🌅 Portfolio Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)} (${currentHour}:00)`);
-}
-
-function applyTheme(theme) {
+    console.log(`🌅 Portfolio Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)} (${currentHour}:${currentMinutes.toString().padStart(2, '0')})`);
+}function applyTheme(theme) {
     const dynamicBackground = document.getElementById('dynamicBackground');
     const body = document.body;
-    
+
     // Remove existing theme classes
     dynamicBackground.className = 'dynamic-background';
-    body.classList.remove('theme-night', 'theme-dawn', 'theme-day', 'theme-sunset');
-    
+    body.classList.remove('theme-night', 'theme-dawn', 'theme-day', 'theme-sunset', 
+                          'theme-sunrise', 'theme-morning', 'theme-afternoon', 'theme-dusk');
+
     // Add new theme class
     dynamicBackground.classList.add(theme);
     body.classList.add(`theme-${theme}`);
-    
+
     // Update document root classes for CSS targeting
     document.documentElement.setAttribute('data-theme', theme);
 }
@@ -74,42 +79,56 @@ function applyTheme(theme) {
 function updateThemeColors(theme) {
     const root = document.documentElement;
     
-    // Map theme-specific colors to active CSS variables
     const themes = {
-        night: {
-            'bg-primary': 'var(--night-bg-primary)',
-            'bg-secondary': 'var(--night-bg-secondary)',
-            'text-primary': 'var(--night-text-primary)',
-            'text-secondary': 'var(--night-text-secondary)',
-            'accent': 'var(--night-accent)'
+        sunrise: {
+            '--primary-bg': 'linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%)',
+            '--secondary-color': '#2d3436',
+            '--accent-color': '#6c5ce7',
+            '--text-light': '#2d3436',
+            '--particle-color': '#fdcb6e'
         },
-        dawn: {
-            'bg-primary': 'var(--dawn-bg-primary)',
-            'bg-secondary': 'var(--dawn-bg-secondary)',
-            'text-primary': 'var(--dawn-text-primary)',
-            'text-secondary': 'var(--dawn-text-secondary)',
-            'accent': 'var(--dawn-accent)'
+        morning: {
+            '--primary-bg': 'linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #00b894 100%)',
+            '--secondary-color': '#2d3436',
+            '--accent-color': '#e84393',
+            '--text-light': '#2d3436',
+            '--particle-color': '#00cec9'
         },
-        day: {
-            'bg-primary': 'var(--day-bg-primary)',
-            'bg-secondary': 'var(--day-bg-secondary)',
-            'text-primary': 'var(--day-text-primary)',
-            'text-secondary': 'var(--day-text-secondary)',
-            'accent': 'var(--day-accent)'
+        afternoon: {
+            '--primary-bg': 'linear-gradient(135deg, #fdcb6e 0%, #e17055 50%, #74b9ff 100%)',
+            '--secondary-color': '#2d3436',
+            '--accent-color': '#a29bfe',
+            '--text-light': '#2d3436',
+            '--particle-color': '#00b894'
         },
         sunset: {
-            'bg-primary': 'var(--sunset-bg-primary)',
-            'bg-secondary': 'var(--sunset-bg-secondary)',
-            'text-primary': 'var(--sunset-text-primary)',
-            'text-secondary': 'var(--sunset-text-secondary)',
-            'accent': 'var(--sunset-accent)'
+            '--primary-bg': 'linear-gradient(135deg, #fd79a8 0%, #e84393 50%, #a29bfe 100%)',
+            '--secondary-color': '#2d3436',
+            '--accent-color': '#fdcb6e',
+            '--text-light': '#ffffff',
+            '--particle-color': '#fab1a0'
+        },
+        dusk: {
+            '--primary-bg': 'linear-gradient(135deg, #6c5ce7 0%, #a29bfe 50%, #2d3436 100%)',
+            '--secondary-color': '#ddd',
+            '--accent-color': '#fdcb6e',
+            '--text-light': '#ffffff',
+            '--particle-color': '#74b9ff'
+        },
+        night: {
+            '--primary-bg': 'linear-gradient(135deg, #2d3436 0%, #636e72 50%, #000000 100%)',
+            '--secondary-color': '#ddd',
+            '--accent-color': '#fdcb6e',
+            '--text-light': '#ffffff',
+            '--particle-color': '#74b9ff'
         }
     };
     
-    // Apply theme colors
-    const themeColors = themes[theme];
-    for (const [property, value] of Object.entries(themeColors)) {
-        root.style.setProperty(`--theme-${property}`, value);
+    const currentTheme = themes[theme];
+    if (currentTheme) {
+        Object.keys(currentTheme).forEach(property => {
+            root.style.setProperty(property, currentTheme[property]);
+        });
     }
 }
 
@@ -121,21 +140,21 @@ function initNavigation() {
     const navbar = document.querySelector('.navbar');
 
     // Mobile menu toggle
-    hamburger.addEventListener('click', function() {
+    hamburger.addEventListener('click', function () {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
     });
 
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
         });
     });
 
     // Navbar scroll effect
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 100) {
             navbar.classList.add('scrolled');
         } else {
@@ -152,18 +171,18 @@ function initNavigation() {
 function highlightActiveNavigation() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     let current = '';
-    
+
     sections.forEach(section => {
         const sectionTop = section.getBoundingClientRect().top;
         const sectionHeight = section.clientHeight;
-        
+
         if (sectionTop <= 100 && sectionTop + sectionHeight > 100) {
             current = section.getAttribute('id');
         }
     });
-    
+
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === `#${current}`) {
@@ -175,18 +194,18 @@ function highlightActiveNavigation() {
 // Smooth scrolling for navigation links
 function initSmoothScrolling() {
     const links = document.querySelectorAll('a[href^="#"]');
-    
+
     links.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
-            
+
             if (targetSection) {
                 const navbarHeight = document.querySelector('.navbar').offsetHeight;
                 const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -202,17 +221,17 @@ function initScrollAnimations() {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
-    const observer = new IntersectionObserver(function(entries) {
+
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
-                
+
                 // Trigger skill bar animation when skills section is visible
                 if (entry.target.classList.contains('skills')) {
                     animateSkillBars();
                 }
-                
+
                 // Trigger counter animation when about section is visible
                 if (entry.target.classList.contains('about')) {
                     animateCounters();
@@ -220,7 +239,7 @@ function initScrollAnimations() {
             }
         });
     }, observerOptions);
-    
+
     // Observe all sections and cards
     const elementsToObserve = document.querySelectorAll('section, .project-card, .certification-card, .timeline-item');
     elementsToObserve.forEach(el => {
@@ -241,7 +260,7 @@ function initSkillBars() {
 
 function animateSkillBars() {
     const progressBars = document.querySelectorAll('.progress');
-    
+
     progressBars.forEach((bar, index) => {
         setTimeout(() => {
             const targetWidth = bar.getAttribute('data-width');
@@ -253,7 +272,7 @@ function animateSkillBars() {
 // Counter animation for statistics
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.textContent.replace(/\D/g, ''));
         const suffix = counter.textContent.replace(/\d/g, '');
@@ -277,10 +296,10 @@ function initTypingAnimation() {
     if (heroName) {
         const text = heroName.textContent;
         heroName.textContent = '';
-        
+
         let index = 0;
         const typingSpeed = 100;
-        
+
         function typeText() {
             if (index < text.length) {
                 heroName.textContent += text.charAt(index);
@@ -288,7 +307,7 @@ function initTypingAnimation() {
                 setTimeout(typeText, typingSpeed);
             }
         }
-        
+
         // Start typing animation after a short delay
         setTimeout(typeText, 1000);
     }
@@ -297,11 +316,11 @@ function initTypingAnimation() {
 // Parallax effects for floating elements
 function initParallaxEffects() {
     const floatingElements = document.querySelectorAll('.floating-element');
-    
-    window.addEventListener('scroll', function() {
+
+    window.addEventListener('scroll', function () {
         const scrolled = window.pageYOffset;
         const parallaxSpeed = 0.5;
-        
+
         floatingElements.forEach((element, index) => {
             const speed = parallaxSpeed * (index + 1);
             element.style.transform = `translateY(${scrolled * speed}px)`;
@@ -312,36 +331,36 @@ function initParallaxEffects() {
 // Contact form handling
 function initContactForm() {
     const form = document.querySelector('.contact-form form');
-    
+
     if (form) {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Get form data
             const formData = new FormData(form);
             const name = formData.get('name');
             const email = formData.get('email');
             const subject = formData.get('subject');
             const message = formData.get('message');
-            
+
             // Simple validation
             if (!name || !email || !subject || !message) {
                 showNotification('Please fill in all fields.', 'error');
                 return;
             }
-            
+
             if (!isValidEmail(email)) {
                 showNotification('Please enter a valid email address.', 'error');
                 return;
             }
-            
+
             // Simulate form submission
             const submitButton = form.querySelector('.btn-primary');
             const originalText = submitButton.textContent;
-            
+
             submitButton.textContent = 'Sending...';
             submitButton.disabled = true;
-            
+
             setTimeout(() => {
                 showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
                 form.reset();
@@ -369,7 +388,7 @@ function showNotification(message, type = 'info') {
             <button class="notification-close">&times;</button>
         </div>
     `;
-    
+
     // Add notification styles
     notification.style.cssText = `
         position: fixed;
@@ -385,14 +404,14 @@ function showNotification(message, type = 'info') {
         transition: transform 0.3s ease;
         max-width: 400px;
     `;
-    
+
     notification.querySelector('.notification-content').style.cssText = `
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 1rem;
     `;
-    
+
     notification.querySelector('.notification-close').style.cssText = `
         background: none;
         border: none;
@@ -402,19 +421,19 @@ function showNotification(message, type = 'info') {
         padding: 0;
         line-height: 1;
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
-    
+
     // Close button functionality
     notification.querySelector('.notification-close').addEventListener('click', () => {
         closeNotification(notification);
     });
-    
+
     // Auto close after 5 seconds
     setTimeout(() => {
         closeNotification(notification);
@@ -435,12 +454,12 @@ function closeNotification(notification) {
 function initLoadingAnimations() {
     // Add fade-in animation to elements
     const elementsToAnimate = document.querySelectorAll('.hero-content, .about-content, .skill-category, .project-card, .certification-card, .timeline-item');
-    
+
     elementsToAnimate.forEach((element, index) => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(30px)';
         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        
+
         setTimeout(() => {
             element.style.opacity = '1';
             element.style.transform = 'translateY(0)';
@@ -472,12 +491,12 @@ window.addEventListener('scroll', debouncedScrollHandler);
 function initMouseFollowEffect() {
     const heroSection = document.querySelector('.hero');
     const floatingElements = document.querySelectorAll('.floating-element');
-    
+
     if (heroSection) {
-        heroSection.addEventListener('mousemove', function(e) {
+        heroSection.addEventListener('mousemove', function (e) {
             const x = (e.clientX / window.innerWidth) * 100;
             const y = (e.clientY / window.innerHeight) * 100;
-            
+
             floatingElements.forEach((element, index) => {
                 const speed = (index + 1) * 0.5;
                 element.style.transform += ` translate(${x * speed}px, ${y * speed}px)`;
@@ -503,8 +522,8 @@ function initScrollProgress() {
         transition: width 0.1s ease;
     `;
     document.body.appendChild(progressBar);
-    
-    window.addEventListener('scroll', function() {
+
+    window.addEventListener('scroll', function () {
         const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
         progressBar.style.width = scrollPercent + '%';
     });
@@ -514,12 +533,12 @@ function initScrollProgress() {
 initScrollProgress();
 
 // Add keyboard navigation support
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
         // Close mobile menu if open
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
-        
+
         if (hamburger.classList.contains('active')) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
@@ -530,7 +549,7 @@ document.addEventListener('keydown', function(e) {
 // Performance optimization: Lazy load images (if any are added later)
 function initLazyLoading() {
     const images = document.querySelectorAll('img[data-src]');
-    
+
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -541,7 +560,7 @@ function initLazyLoading() {
             }
         });
     });
-    
+
     images.forEach(img => imageObserver.observe(img));
 }
 
@@ -554,10 +573,10 @@ initProfileImage();
 // Profile image handling function
 function initProfileImage() {
     const profileImages = document.querySelectorAll('.profile-photo, .about-profile-img');
-    
+
     profileImages.forEach(img => {
         // Add loading event listener
-        img.addEventListener('load', function() {
+        img.addEventListener('load', function () {
             console.log('Profile image loaded successfully');
             // Hide any fallback content
             const avatar = this.closest('.hero-avatar');
@@ -565,9 +584,9 @@ function initProfileImage() {
                 avatar.style.background = 'transparent';
             }
         });
-        
+
         // Add error event listener
-        img.addEventListener('error', function() {
+        img.addEventListener('error', function () {
             console.log('Profile image failed to load, using fallback');
             // Show fallback avatar
             const avatar = this.closest('.hero-avatar');
@@ -591,7 +610,7 @@ function initProfileImage() {
                 }
             }
         });
-        
+
         // Force check if image is already loaded or has error
         if (img.complete) {
             if (img.naturalWidth === 0) {

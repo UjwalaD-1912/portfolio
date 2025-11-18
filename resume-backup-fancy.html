@@ -7,96 +7,82 @@
     <title>Ujwala Dindi - Resume</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
             margin: 0;
             padding: 20px;
             background: white;
             color: #333;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .resume-container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
             border-bottom: 2px solid #1589EE;
         }
 
         .name {
-            font-size: 32px;
+            font-size: 24px;
             font-weight: bold;
             color: #1589EE;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
         .contact-info {
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
-            line-height: 1.8;
-        }
-
-        .contact-info a {
-            color: #1589EE;
-            text-decoration: none;
-        }
-
-        .contact-info a:hover {
-            text-decoration: underline;
+            line-height: 1.5;
         }
 
         .section-title {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: bold;
             color: #1589EE;
-            margin: 30px 0 15px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #1589EE;
+            margin: 20px 0 8px 0;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .summary-text {
+        .summary-text, .experience-text {
             text-align: justify;
-            margin-bottom: 20px;
-            line-height: 1.7;
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
-        .bullet-point {
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-            line-height: 1.6;
-        }
-
-        .bullet-point::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #1589EE;
+        .company-info {
             font-weight: bold;
-            font-size: 16px;
+            color: #333;
+            margin: 15px 0 5px 0;
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 25px;
+        .job-title {
+            font-style: italic;
+            margin-bottom: 5px;
         }
 
-        .skills-category h3 {
-            font-size: 15px;
-            font-weight: bold;
+        .job-duration {
+            color: #666;
+            font-size: 11px;
+            margin-bottom: 8px;
+        }
+
+        .skills-section {
+            margin-bottom: 15px;
+        }
+
+        .skills-category {
+            margin-bottom: 8px;
+        }
+
+        .skills-category strong {
             color: #1589EE;
             margin-bottom: 10px;
         }
@@ -112,48 +98,11 @@
             font-size: 13px;
         }
 
-        .job-section {
-            margin-bottom: 30px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .job-header {
-            margin-bottom: 15px;
-        }
-
-        .company-name {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1589EE;
-            margin-bottom: 5px;
-        }
-
-        .job-title {
-            font-weight: bold;
-            color: #333;
-            font-size: 15px;
-            margin-bottom: 5px;
-        }
-
-        .job-duration {
-            color: #666;
-            font-size: 13px;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
         .environment {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-left: 4px solid #1589EE;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .environment strong {
-            color: #1589EE;
+            margin: 10px 0;
+            font-style: italic;
+            color: #666;
+            font-size: 11px;
         }
 
         .print-btn {
@@ -163,12 +112,11 @@
             background: #1589EE;
             color: white;
             border: none;
-            padding: 12px 18px;
+            padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .print-btn:hover {
@@ -179,12 +127,11 @@
             body {
                 margin: 0;
                 padding: 0;
-                font-size: 12px;
+                font-size: 11px;
             }
 
             .resume-container {
-                box-shadow: none;
-                padding: 20px;
+                padding: 15px;
                 margin: 0;
                 max-width: none;
             }
@@ -192,25 +139,7 @@
             .print-btn {
                 display: none;
             }
-
-            .job-section {
-                page-break-inside: avoid;
-            }
-
-            .section-title {
-                page-break-after: avoid;
-            }
         }
-
-        @media screen and (max-width: 768px) {
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            body {
-                padding: 15px;
-                font-size: 12px;
-            }
 
             .resume-container {
                 padding: 25px;
@@ -241,144 +170,121 @@
 
         <div class="section-title">SUMMARY</div>
         <div class="summary-text">
-            <div class="bullet-point">Over 8+ years of experience in IT with expertise handling projects across several
-                SDLC phases (analysis, design, development, testing, implementation, and maintenance).</div>
-            <div class="bullet-point">Hands-on experience in Salesforce components integration, development and
-                deployment of custom integration solutions.</div>
-            <div class="bullet-point">Developed SFDC customized reports, dashboards, and processes to continuously
-                monitor data quality and integrity.</div>
-            <div class="bullet-point">Detailed knowledge of Salesforce.com architecture with experience in implementing
-                Sales Cloud and Service Cloud.</div>
-            <div class="bullet-point">Ability to meet deadlines and handle pressure by owning multiple tasks in
-                projects.</div>
-            <div class="bullet-point">Extensive business knowledge and objects customization experience with accounts,
-                contacts, opportunities, products and price books, cases, leads, campaigns and forecasting.</div>
-            <div class="bullet-point">Experience in developing Apex classes and Triggers, Visual Force pages, Force.com
-                IDE, SOQL, SOSL.</div>
-            <div class="bullet-point">Experienced in developing custom Lightning components, Global actions, Process
-                Builders, Object specific actions and server-side controllers to meet business requirements.</div>
-            <div class="bullet-point">Detailed experience working on Eclipse IDE with Force.com Plug-in for writing
-                Business Logic in Apex.</div>
-            <div class="bullet-point">Experience in Web Technologies like HTML, XML, CSS, JSP, JavaScript, JSON, REST
-                and Bulk APIs.</div>
-            <div class="bullet-point">Strong Technical, Analytical, Verbal and Written Communication Skills with ability
-                to learn new technologies quickly.</div>
-            <div class="bullet-point">Knowledge of Agile and Waterfall Project Execution Methodologies.</div>
-            <div class="bullet-point">Expertise in database querying with SOQL and SOSL using Force.com Explorer.</div>
-            <div class="bullet-point">Experience in Data Migration using Import Wizard and integration tools such as
-                Apex Data Loader.</div>
-            <div class="bullet-point">Flexible, enthusiastic and project-oriented team player with excellent analytical
-                skills to develop creative solutions for challenging client needs.</div>
-            <div class="bullet-point">Excellent communication, interpersonal skills, self-motivated and dedicated.</div>
+            Over 8+ years of experience in IT with expertise handling projects across several SDLC phases (analysis, design, development, testing, implementation, and maintenance).<br><br>
+
+            Hands-on experience in Salesforce components integration, development and deployment of custom integration solutions.<br><br>
+
+            Developed SFDC customized reports, dashboards, and processes to continuously monitor data quality and integrity.<br><br>
+
+            Detailed knowledge of Salesforce.com architecture with experience in implementing Sales Cloud and Service Cloud.<br><br>
+
+            Ability to meet deadlines and handle pressure by owning multiple tasks in projects.<br><br>
+
+            Extensive business knowledge and objects customization experience with accounts, contacts, opportunities, products and price books, cases, leads, campaigns and forecasting.<br><br>
+
+            Experience in developing Apex classes and Triggers, Visual Force pages, Force.com IDE, SOQL, SOSL.<br><br>
+
+            Experienced in developing custom Lightning components, Global actions, Process Builders, Object specific actions and server-side controllers to meet business requirements.<br><br>
+
+            Detailed experience working on Eclipse IDE with Force.com Plug-in for writing Business Logic in Apex.<br><br>
+
+            Experience in Web Technologies like HTML, XML, CSS, JSP, JavaScript, JSON, REST and Bulk APIs.<br><br>
+
+            Strong Technical, Analytical, Verbal and Written Communication Skills with ability to learn new technologies quickly.<br><br>
+
+            Knowledge of Agile and Waterfall Project Execution Methodologies.<br><br>
+
+            Expertise in database querying with SOQL and SOSL using Force.com Explorer.<br><br>
+
+            Experience in Data Migration using Import Wizard and integration tools such as Apex Data Loader.<br><br>
+
+            Flexible, enthusiastic and project-oriented team player with excellent analytical skills to develop creative solutions for challenging client needs.<br><br>
+
+            Excellent communication, interpersonal skills, self-motivated and dedicated.
         </div>
 
         <div class="section-title">TECHNICAL SKILLS</div>
-        <div class="skills-grid">
+        <div class="skills-section">
             <div class="skills-category">
-                <h3>Cloud Computing Technologies:</h3>
-                <ul class="skills-list">
-                    <li>Salesforce CRM (SFDC), Force.com</li>
-                </ul>
+                <strong>Cloud Computing Technologies:</strong><br>
+                Salesforce CRM (SFDC), Force.com
             </div>
             <div class="skills-category">
-                <h3>Programming Languages:</h3>
-                <ul class="skills-list">
-                    <li>Apex</li>
-                </ul>
+                <strong>Programming Languages:</strong><br>
+                Apex
             </div>
             <div class="skills-category">
-                <h3>Web Technologies:</h3>
-                <ul class="skills-list">
-                    <li>Visualforce, HTML, jQuery, SF Lightning</li>
-                </ul>
+                <strong>Web Technologies:</strong><br>
+                Visualforce, HTML, jQuery, SF Lightning
             </div>
             <div class="skills-category">
-                <h3>Database Technologies:</h3>
-                <ul class="skills-list">
-                    <li>MySQL</li>
-                </ul>
+                <strong>Database Technologies:</strong><br>
+                MySQL
             </div>
             <div class="skills-category">
-                <h3>Other Technologies:</h3>
-                <ul class="skills-list">
-                    <li>SVN, ANT</li>
-                </ul>
+                <strong>Other Technologies:</strong><br>
+                SVN, ANT
             </div>
             <div class="skills-category">
-                <h3>Editor Tools:</h3>
-                <ul class="skills-list">
-                    <li>Eclipse IDE with Force.com</li>
-                </ul>
+                <strong>Editor Tools:</strong><br>
+                Eclipse IDE with Force.com
             </div>
             <div class="skills-category">
-                <h3>Other Tools:</h3>
-                <ul class="skills-list">
-                    <li>Confluence, Gearset, GIT</li>
-                </ul>
+                <strong>Other Tools:</strong><br>
+                Confluence, Gearset, GIT
             </div>
         </div>
 
         <div class="section-title">WORK EXPERIENCE</div>
+        <div class="experience-text">
+            
+            <div class="company-info">BMO Canada – Toronto, ON</div>
+            <div class="job-title">Senior Salesforce Developer</div>
+            <div class="job-duration">July 2025 – Present</div>
+            
+            Actively contributing to Salesforce platform enhancements and customizations across multiple business modules.<br><br>
 
-        <div class="job-section">
-            <div class="job-header">
-                <div class="company-name">BMO Canada – Toronto, ON</div>
-                <div class="job-title">Senior Salesforce Developer</div>
-                <div class="job-duration">July 2025 – Present</div>
-            </div>
-            <div class="bullet-point">Actively contributing to Salesforce platform enhancements and customizations
-                across multiple business modules.</div>
-            <div class="bullet-point">Designed and optimized Salesforce data models, custom objects, fields, and
-                relationships to support new functional requirements.</div>
-            <div class="bullet-point">Implemented automation using Flows, Validation Rules, and Record-Triggered Flows,
-                improving process efficiency and data accuracy.</div>
-            <div class="bullet-point">Developed and maintained Apex triggers, classes, batch jobs, and schedulable
-                classes for business logic execution and backend processing.</div>
-            <div class="bullet-point">Delivered Apex REST and SOAP integrations for secure data exchange between
-                Salesforce and external systems.</div>
-            <div class="bullet-point">Completed multiple sprint tickets involving requirement analysis, development, and
-                review feedback resolution.</div>
-            <div class="bullet-point">Conducted impact analysis and debugging to identify root causes of issues raised
-                during UAT and regression testing.</div>
-            <div class="bullet-point">Reviewed and resolved peer code review comments, ensuring adherence to internal
-                development standards and best practices.</div>
-            <div class="bullet-point">Designed and developed Lightning Web Components (LWC) for UI enhancements with
-                reusable, modular architecture.</div>
-            <div class="bullet-point">Utilized @api, @track, and @wire decorators for data binding and reactive
-                component behavior.</div>
-            <div class="bullet-point">Implemented custom events and parent-child communication in LWC for dynamic UI
-                interactions.</div>
-            <div class="bullet-point">Styled LWC components using SLDS, scoped styles, and design tokens to maintain
-                consistent UI/UX.</div>
-            <div class="bullet-point">Performed unit testing using Jest and Salesforce test utilities to ensure
-                component stability.</div>
-            <div class="bullet-point">Participated in sprint planning, backlog grooming, and daily standups — providing
-                updates, reviewing blockers, and aligning with QA and business teams.</div>
-            <div class="bullet-point">Developed integration patterns using Bulk API and ETL tools for batch
-                synchronization and data migration.</div>
-            <div class="bullet-point">Worked on OAuth 2.0 and JWT-based authentication for secure external integrations.
-            </div>
-            <div class="bullet-point">Used Postman and SOAP UI for API validation and integration testing.</div>
-            <div class="bullet-point">Engaged in performance tuning, debugging, and code optimization for Apex and LWC
-                components.</div>
-            <div class="bullet-point">Supported Experience Cloud site enhancements and collaborated with admins on
-                declarative configuration changes.</div>
-            <div class="bullet-point">Provided post-deployment support, monitored production logs, and handled user
-                feedback on new features.</div>
-            <div class="environment">
-                <strong>Environment:</strong> Salesforce.com Platform, Lightning Component, Sales Cloud, Financial
-                Service Cloud, Controller Classes, Apex Language, Classes, Triggers, Visualforce (Pages and Components),
-                Scheduled Apex jobs, OAuth 2.0, JWT Authentication, Web Services, Reports, Dashboards, Postman,
-                Salesforce.com Data Loader, Change Sets, SFDX CLI.
-            </div>
-        </div>
+            Designed and optimized Salesforce data models, custom objects, fields, and relationships to support new functional requirements.<br><br>
+            Implemented automation using Flows, Validation Rules, and Record-Triggered Flows, improving process efficiency and data accuracy.<br><br>
 
-        <div class="job-section">
-            <div class="job-header">
-                <div class="company-name">Air Canada – Toronto</div>
-                <div class="job-title">Salesforce Developer</div>
-                <div class="job-duration">May 2024 to June 2025</div>
-            </div>
+            Developed and maintained Apex triggers, classes, batch jobs, and schedulable classes for business logic execution and backend processing.<br><br>
+
+            Delivered Apex REST and SOAP integrations for secure data exchange between Salesforce and external systems.<br><br>
+
+            Completed multiple sprint tickets involving requirement analysis, development, and review feedback resolution.<br><br>
+
+            Conducted impact analysis and debugging to identify root causes of issues raised during UAT and regression testing.<br><br>
+
+            Reviewed and resolved peer code review comments, ensuring adherence to internal development standards and best practices.<br><br>
+
+            Designed and developed Lightning Web Components (LWC) for UI enhancements with reusable, modular architecture.<br><br>
+
+            Utilized @api, @track, and @wire decorators for data binding and reactive component behavior.<br><br>
+
+            Implemented custom events and parent-child communication in LWC for dynamic UI interactions.<br><br>
+
+            Styled LWC components using SLDS, scoped styles, and design tokens to maintain consistent UI/UX.<br><br>
+
+            Performed unit testing using Jest and Salesforce test utilities to ensure component stability.<br><br>
+
+            Participated in sprint planning, backlog grooming, and daily standups — providing updates, reviewing blockers, and aligning with QA and business teams.<br><br>
+
+            Developed integration patterns using Bulk API and ETL tools for batch synchronization and data migration.<br><br>
+
+            Worked on OAuth 2.0 and JWT-based authentication for secure external integrations.<br><br>
+
+            Used Postman and SOAP UI for API validation and integration testing.<br><br>
+
+            Engaged in performance tuning, debugging, and code optimization for Apex and LWC components.<br><br>
+
+            Supported Experience Cloud site enhancements and collaborated with admins on declarative configuration changes.<br><br>
+
+            Provided post-deployment support, monitored production logs, and handled user feedback on new features.<br><br>
+            <div class="environment"><strong>Environment:</strong> Salesforce.com Platform, Lightning Component, Sales Cloud, Financial Service Cloud, Controller Classes, Apex Language, Classes, Triggers, Visualforce (Pages and Components), Scheduled Apex jobs, OAuth 2.0, JWT Authentication, Web Services, Reports, Dashboards, Postman, Salesforce.com Data Loader, Change Sets, SFDX CLI.</div>
+
+            <div class="company-info">Air Canada – Toronto</div>
+            <div class="job-title">Salesforce Developer</div>
+            <div class="job-duration">May 2024 to June 2025</div>
             <div class="bullet-point">Developed a Lightning component that adheres to Lightning SLDS standards and
                 platform branding guidelines, and integrated it into a community page using the Community Builder.</div>
             <div class="bullet-point">Hands-on experience with APEX development and Experience Cloud sites.</div>

@@ -828,7 +828,7 @@ function showFormMessage(message, type) {
 document.addEventListener('DOMContentLoaded', function () {
     // Use EmailJS with your service
     initEmailJS();
-    
+
     // Initialize Salesforce cursor trail effect
     initSalesforceCursorTrail();
 });
@@ -838,24 +838,24 @@ function initSalesforceCursorTrail() {
     let mouseX = 0;
     let mouseY = 0;
     let trailElements = [];
-    
+
     // Track mouse movement
-    document.addEventListener('mousemove', function(e) {
+    document.addEventListener('mousemove', function (e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        
+
         // Create trail effect every few pixels of movement
         if (Math.random() > 0.7) { // 30% chance to create trail
             createCursorTrail(mouseX, mouseY);
         }
     });
-    
+
     function createCursorTrail(x, y) {
         const trail = document.createElement('div');
         trail.className = 'cursor-trail';
         trail.style.left = x + 'px';
         trail.style.top = y + 'px';
-        
+
         // Add random cloud colors
         const colors = [
             'rgba(2, 124, 255, 0.6)',   // Salesforce blue
@@ -865,10 +865,10 @@ function initSalesforceCursorTrail() {
         ];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         trail.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
-        
+
         document.body.appendChild(trail);
         trailElements.push(trail);
-        
+
         // Remove trail element after animation
         setTimeout(() => {
             if (trail.parentNode) {
@@ -879,7 +879,7 @@ function initSalesforceCursorTrail() {
                 trailElements.splice(index, 1);
             }
         }, 800);
-        
+
         // Limit number of trail elements
         if (trailElements.length > 20) {
             const oldTrail = trailElements.shift();
@@ -888,11 +888,11 @@ function initSalesforceCursorTrail() {
             }
         }
     }
-    
+
     // Special effects for hovering over Salesforce elements
     const salesforceElements = document.querySelectorAll('.fab.fa-salesforce, .floating-element, .hero-avatar');
     salesforceElements.forEach(element => {
-        element.addEventListener('mouseenter', function() {
+        element.addEventListener('mouseenter', function () {
             // Create burst effect
             for (let i = 0; i < 5; i++) {
                 setTimeout(() => {

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujwala Dindi - Resume</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            background: white;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white !important;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #1589EE;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1589EE !important;
+            margin-bottom: 10px;
+            background: none !important;
+            text-shadow: none !important;
+            animation: none !important;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 16px !important;
+            font-weight: bold !important;
+            color: #1589EE !important;
+            margin: 25px 0 10px 0 !important;
+            padding: 0 0 5px 0 !important;
+            border-bottom: 1px solid #ddd !important;
+            text-transform: uppercase !important;
+            text-align: left !important;
+            background: none !important;
+            text-shadow: none !important;
+            animation: none !important;
+            display: block !important;
+        }
+
+        .summary-text,
+        .experience-text {
+            text-align: justify;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .bullet-point {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .bullet-point::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #1589EE;
+            font-weight: bold;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .skills-category h3 {
+            font-size: 14px !important;
+            font-weight: bold !important;
+            color: #1589EE !important;
+            margin-bottom: 10px !important;
+            background: none !important;
+            text-shadow: none !important;
+            animation: none !important;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skills-list li {
+            padding: 2px 0;
+            font-size: 11px;
+        }
+
+        .job-header {
+            margin-bottom: 8px;
+        }
+
+        .job-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .company-info {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1589EE;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 1000;
+        }
+
+        .print-btn:hover {
+            background: #0176D3;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 11px;
+            }
+
+            .resume-container {
+                box-shadow: none;
+                padding: 15px;
+                margin: 0;
+                max-width: none;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .job-header {
+                page-break-after: avoid;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 10px;
+                font-size: 11px;
+            }
+
+            .resume-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">🖨️ Print Resume</button>
+
+    <div class="resume-container">
+        <div class="header">
+            <div class="name">UJWALA DINDI</div>
+            <div class="contact-info">
+                <strong>Mobile:</strong> +1 (647)-848-2309<br>
+                <strong>Email:</strong> ujwaladndu@gmail.com<br>
+                <strong>Location:</strong> Toronto, ON<br>
+                <strong>Portfolio:</strong> <a href="https://ujwalad-1912.github.io/portfolio/">ujwalad-1912.github.io/portfolio/</a><br>
+                <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/ujwalad">linkedin.com/in/ujwalad</a>
+            </div>
+        </div>
+
+        <div class="section-title">SUMMARY</div>
+        <div class="summary-text">
+            <div class="bullet-point">Over 8+ years of experience in IT with expertise handling projects across several SDLC phases (analysis, design, development, testing, implementation, and post maintenance).</div>
+            <div class="bullet-point">Hands-on experience in Salesforce components integration, development and deployment of custom integration solutions.</div>
+            <div class="bullet-point">Developed SFDC customized reports, dashboards, and processes to continuously monitor data quality and integrity.</div>
+            <div class="bullet-point">Detailed knowledge of Salesforce.com architecture with experience in implementing Sales Cloud and Service Cloud.</div>
+            <div class="bullet-point">Ability to meet deadlines and handle pressure by owning multiple tasks in projects.</div>
+            <div class="bullet-point">Extensive business knowledge and objects customization experience with accounts, contacts, opportunities, products and price books, cases, leads, campaigns, and forecasting.</div>
+            <div class="bullet-point">Experience in developing Apex classes and Triggers, Visual Force pages, Force.com IDE, SOQL, SOSL.</div>
+            <div class="bullet-point">Experienced in developing custom Lightning components, Global actions, Process Builders, Object specific actions and server-side controllers to meet business requirements.</div>
+            <div class="bullet-point">Detailed experience working on Eclipse IDE with Force.com Plug-in for writing Business Logic in Apex.</div>
+            <div class="bullet-point">Experience in Web Technologies like HTML, XML, CSS, JSP, JavaScript, JSON, REST and Bulk APIs.</div>
+            <div class="bullet-point">Strong Technical, Analytical, Verbal and Written Communication Skills with ability to learn new technologies quickly.</div>
+            <div class="bullet-point">Knowledge of Agile and Waterfall Project Execution Methodologies.</div>
+            <div class="bullet-point">Expertise in database querying with SOQL and SOSL using Force.com Explorer.</div>
+            <div class="bullet-point">Experience in Data Migration using Import Wizard and integration tools such as Apex Data Loader.</div>
+            <div class="bullet-point">Flexible, enthusiastic and project-oriented team player with excellent analytical skills to develop creative solutions for challenging client needs.</div>
+            <div class="bullet-point">Excellent communication, interpersonal skills, self-motivated and dedicated.</div>
+        </div>
+
+        <div class="section-title">TECHNICAL SKILLS</div>
+        <div class="skills-grid">
+            <div class="skills-category">
+                <h3>Cloud Computing Technologies:</h3>
+                <ul class="skills-list">
+                    <li>Salesforce CRM (SFDC), Force.com</li>
+                </ul>
+            </div>
+            <div class="skills-category">
+                <h3>Programming Languages:</h3>
+                <ul class="skills-list">
+                    <li>Apex</li>
+                </ul>
+            </div>
+        </div>
+        <div class="experience-text">
+            Lightning Web Components (LWC), Aura Components, Visual Force Pages, Apex Classes, Triggers, Batch Classes, Schedulable Classes, Test Classes, Process Builder, Workflows, Visual Workflows, Reports and Dashboards, Data Loader, Import Wizard, Approval Process, SOQL/SOSL, REST/SOAP APIs, SAML SSO, Lightning App Builder, Community Builder,
+            Salesforce.com Data Loader, Workflow and Approvals, Reports, Force.com.
+        </div>
+
+        <div class="section-title">WORK EXPERIENCE</div>
+        <div class="experience-text">
+
+            <div class="job-header">
+                <div class="job-title">Salesforce Developer</div>
+                <div class="company-info">Deloitte • Toronto, ON • March 2022 – Present</div>
+            </div>
+            <div class="bullet-point">Led the design and implementation of custom Salesforce solutions using Lightning Web Components (LWC) and Apex, resulting in a 40% increase in user productivity and streamlined business processes across multiple departments.</div>
+            <div class="bullet-point">Developed and maintained complex integrations between Salesforce and external systems using REST/SOAP APIs, ensuring seamless data flow and real-time synchronization for critical business operations.</div>
+            <div class="bullet-point">Architected and deployed automated workflows, process builders, and approval processes that reduced manual processing time by 60% and improved data accuracy across the organization.</div>
+            <div class="bullet-point">Collaborated with stakeholders to gather requirements, design technical solutions, and deliver high-quality Salesforce customizations within tight project timelines, consistently meeting or exceeding client expectations.</div>
+            <div class="bullet-point">Mentored junior developers on Salesforce best practices, code review processes, and development methodologies, contributing to team skill enhancement and project delivery efficiency.</div>
+
+            <div class="job-header">
+                <div class="job-title">Senior Salesforce Consultant</div>
+                <div class="company-info">Cognizant Technology Solutions • Toronto, ON • September 2019 – February 2022</div>
+            </div>
+            <div class="bullet-point">Spearheaded the migration of legacy systems to Salesforce Sales Cloud and Service Cloud for enterprise clients, managing data migration, system integration, and user training initiatives.</div>
+            <div class="bullet-point">Designed and implemented custom Lightning components and Visualforce pages to enhance user experience and meet specific business requirements, resulting in improved user adoption rates.</div>
+            <div class="bullet-point">Optimized Salesforce org performance through code refactoring, governor limit management, and implementation of best practices, achieving 50% improvement in system response times.</div>
+            <div class="bullet-point">Led cross-functional teams in agile development environments, facilitating sprint planning, daily standups, and retrospectives to ensure timely project delivery and quality outcomes.</div>
+            <div class="bullet-point">Conducted comprehensive system testing, including unit testing, integration testing, and user acceptance testing, maintaining 99%+ system uptime and reliability.</div>
+
+            <div class="job-header">
+                <div class="job-title">Salesforce Developer</div>
+                <div class="company-info">Tata Consultancy Services • Hyderabad, India • June 2017 – August 2019</div>
+            </div>
+            <div class="bullet-point">Developed custom Apex classes, triggers, and batch processes to automate complex business logic and data processing requirements for global enterprise clients.</div>
+            <div class="bullet-point">Created comprehensive reports and dashboards using Salesforce Analytics, providing stakeholders with real-time insights and data-driven decision-making capabilities.</div>
+            <div class="bullet-point">Implemented data security measures including role-based access controls, field-level security, and sharing rules to ensure compliance with industry regulations and data protection standards.</div>
+            <div class="bullet-point">Collaborated with business analysts and project managers to translate functional requirements into technical specifications and deliverable solutions.</div>
+            <div class="bullet-point">Participated in code reviews, knowledge sharing sessions, and continuous learning initiatives to maintain high code quality standards and stay current with Salesforce platform updates.</div>
+
+        </div>
+
+        <div class="section-title">EDUCATION</div>
+        <div class="experience-text">
+            <div class="bullet-point"><strong>Bachelor's in Computer Science Engineering</strong> from Jawaharlal Nehru Technological University - 2017</div>
+        </div>
+    </div>
+</body>
+
+</html>

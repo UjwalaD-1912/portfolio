@@ -32,10 +32,17 @@
         }
 
         .name {
-            font-size: 28px;
-            font-weight: bold;
-            color: #1589EE;
-            margin-bottom: 10px;
+            font-size: 28px !important;
+            font-weight: bold !important;
+            color: #1589EE !important;
+            margin-bottom: 10px !important;
+            text-align: center !important;
+            background: none !important;
+            background-clip: initial !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: #1589EE !important;
+            text-shadow: none !important;
+            animation: none !important;
         }
 
         .contact-info {
@@ -45,13 +52,28 @@
         }
 
         .section-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1589EE;
-            margin: 25px 0 10px 0;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #ddd;
-            text-transform: uppercase;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            color: #1589EE !important;
+            margin: 25px 0 10px 0 !important;
+            padding: 0 0 5px 0 !important;
+            border-bottom: 1px solid #ddd !important;
+            text-transform: uppercase !important;
+            text-align: left !important;
+            background: none !important;
+            background-clip: initial !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: #1589EE !important;
+            text-shadow: none !important;
+            animation: none !important;
+            transform: none !important;
+            left: auto !important;
+            display: block !important;
+            border-radius: 0 !important;
+            backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            border-bottom: 1px solid #ddd !important;
         }
 
         .summary-text,
@@ -180,6 +202,34 @@
             .resume-container {
                 padding: 15px;
             }
+        }
+
+        /* Override any external animated styles */
+        h1, h2, h3, h4, h5, h6, .category-title, .arch-category h3, .timeline-content h3, .project-content h3, .certification-card h3 {
+            background: none !important;
+            background-clip: initial !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: initial !important;
+            text-shadow: none !important;
+            animation: none !important;
+            transform: none !important;
+            left: auto !important;
+            display: block !important;
+            text-align: left !important;
+            color: #333 !important;
+            padding: 0 !important;
+            margin: 10px 0 !important;
+            border-radius: 0 !important;
+            backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /* Ensure no external CSS interferes */
+        * {
+            background-clip: initial !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: initial !important;
         }
     </style>
 </head>

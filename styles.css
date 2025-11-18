@@ -727,26 +727,48 @@ body.theme-dawn .hero-name {
     font-weight: var(--font-weight-bold);
     text-align: center;
     margin-bottom: var(--spacing-xxl);
-    color: #FF8C42;
     position: relative;
-    text-shadow: 0 0 15px rgba(255, 140, 66, 0.8), 0 2px 4px rgba(0, 0, 0, 0.3);
     padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border: 2px solid rgba(255, 140, 66, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
     display: inline-block;
     transform: translateX(-50%);
     left: 50%;
+    background: linear-gradient(135deg,
+            #B85450,
+            /* Muted Red */
+            #D2691E,
+            /* Muted Orange */
+            #DAA520,
+            /* Muted Gold */
+            #32CD32,
+            /* Muted Green */
+            #4169E1,
+            /* Muted Blue */
+            #6A5ACD,
+            /* Muted Purple */
+            #C71585,
+            /* Muted Pink */
+            #CD5C5C
+            /* Muted Coral */
+        );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 0 15px rgba(184, 84, 80, 0.4),
+        0 0 20px rgba(218, 165, 32, 0.3),
+        0 0 25px rgba(65, 105, 225, 0.3);
+    animation: subtleRainbowFlow 6s ease-in-out infinite;
 }
 
 .section-title:hover {
     transform: translateX(-50%) translateY(-5px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    color: #FFB366;
-    text-shadow: 0 0 20px rgba(255, 179, 102, 1);
 }
 
 /* Theme-specific section title adjustments */
@@ -1811,9 +1833,25 @@ body.theme-dawn .navbar.scrolled {
 }
 
 .skill-item span {
-    color: #FF8C42;
     font-weight: var(--font-weight-medium);
-    text-shadow: 0 0 8px rgba(255, 140, 66, 0.4);
+    background: linear-gradient(135deg,
+            #B85450,
+            #D2691E,
+            #DAA520,
+            #32CD32,
+            #4169E1,
+            #6A5ACD,
+            #C71585,
+            #CD5C5C
+        );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 0 8px rgba(184, 84, 80, 0.3),
+        0 0 12px rgba(218, 165, 32, 0.2);
+    animation: subtleRainbowFlow 6s ease-in-out infinite;
 }
 
 /* Architecture Section */
@@ -1860,16 +1898,32 @@ body.theme-dawn .navbar.scrolled {
 .arch-category h3 {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: #FF6B35;
     margin-bottom: var(--spacing-lg);
-    text-shadow: 0 0 10px rgba(255, 107, 53, 0.7), 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
-    border: 2px solid rgba(255, 107, 53, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background: linear-gradient(135deg,
+            #B85450,
+            #D2691E,
+            #DAA520,
+            #32CD32,
+            #4169E1,
+            #6A5ACD,
+            #C71585,
+            #CD5C5C
+        );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 0 10px rgba(184, 84, 80, 0.3),
+        0 0 15px rgba(218, 165, 32, 0.2),
+        0 0 20px rgba(65, 105, 225, 0.2);
+    animation: subtleRainbowFlow 6s ease-in-out infinite;
 }
 
 .arch-list {
@@ -1921,17 +1975,33 @@ body.theme-dawn .navbar.scrolled {
 .category-title {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: #FF8C42;
     margin-bottom: var(--spacing-xl);
     text-align: center;
     position: relative;
-    text-shadow: 0 0 10px rgba(255, 140, 66, 0.7), 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
-    border: 2px solid rgba(255, 140, 66, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg,
+            #B85450,
+            #D2691E,
+            #DAA520,
+            #32CD32,
+            #4169E1,
+            #6A5ACD,
+            #C71585,
+            #CD5C5C
+        );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 0 10px rgba(184, 84, 80, 0.3),
+        0 0 15px rgba(218, 165, 32, 0.2),
+        0 0 20px rgba(65, 105, 225, 0.2);
+    animation: subtleRainbowFlow 6s ease-in-out infinite;
 }
 
 .category-title::after {
@@ -2128,9 +2198,26 @@ body.theme-dawn .navbar.scrolled {
 .timeline-content h3 {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: #FF8C42;
     margin-bottom: var(--spacing-sm);
-    text-shadow: 0 0 8px rgba(255, 140, 66, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg,
+            #B85450,
+            #D2691E,
+            #DAA520,
+            #32CD32,
+            #4169E1,
+            #6A5ACD,
+            #C71585,
+            #CD5C5C
+        );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 0 8px rgba(184, 84, 80, 0.3),
+        0 0 12px rgba(218, 165, 32, 0.2),
+        0 0 16px rgba(65, 105, 225, 0.2);
+    animation: subtleRainbowFlow 6s ease-in-out infinite;
 }
 
 .timeline-content h4 {
@@ -2272,9 +2359,26 @@ body.theme-dawn .navbar.scrolled {
 .project-content h3 {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: #FF6B35;
     margin-bottom: var(--spacing-md);
-    text-shadow: 0 0 8px rgba(255, 107, 53, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg,
+            #B85450,
+            #D2691E,
+            #DAA520,
+            #32CD32,
+            #4169E1,
+            #6A5ACD,
+            #C71585,
+            #CD5C5C
+        );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 0 8px rgba(184, 84, 80, 0.3),
+        0 0 12px rgba(218, 165, 32, 0.2),
+        0 0 16px rgba(65, 105, 225, 0.2);
+    animation: subtleRainbowFlow 6s ease-in-out infinite;
 }
 
 .project-content p {
@@ -2436,9 +2540,26 @@ body.theme-dawn .navbar.scrolled {
 .certification-card h3 {
     font-size: 1.25rem;
     font-weight: var(--font-weight-bold);
-    color: #FF8C42;
     margin-bottom: var(--spacing-md);
-    text-shadow: 0 0 8px rgba(255, 140, 66, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg,
+            #B85450,
+            #D2691E,
+            #DAA520,
+            #32CD32,
+            #4169E1,
+            #6A5ACD,
+            #C71585,
+            #CD5C5C
+        );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 0 8px rgba(184, 84, 80, 0.3),
+        0 0 12px rgba(218, 165, 32, 0.2),
+        0 0 16px rgba(65, 105, 225, 0.2);
+    animation: subtleRainbowFlow 6s ease-in-out infinite;
 }
 
 .certification-card p {

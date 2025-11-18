@@ -902,3 +902,206 @@ function initSalesforceCursorTrail() {
         });
     });
 }
+
+// Mobile-Specific Enhancements
+function initMobileEnhancements() {
+    // Detect mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (isMobile || isTouchDevice) {
+        document.body.classList.add('mobile-device');
+        
+        // Mobile-specific optimizations
+        optimizeForMobile();
+        
+        // Touch gestures
+        initTouchGestures();
+        
+        // Mobile navigation improvements
+        improveMobileNavigation();
+        
+        // Optimize animations for mobile
+        optimizeAnimationsForMobile();
+        
+        console.log('📱 Mobile enhancements activated');
+    }
+}
+
+function optimizeForMobile() {
+    // Reduce animation complexity on mobile
+    const animatedElements = document.querySelectorAll('[data-aos]');
+    animatedElements.forEach(element => {
+        element.style.animationDuration = '0.3s';
+        element.style.transitionDuration = '0.3s';
+    });
+
+    // Optimize images for mobile
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        img.loading = 'lazy';
+        img.style.imageRendering = 'auto';
+    });
+
+    // Reduce particle effects on mobile
+    const particleCount = document.querySelectorAll('.particle, .floating-element').length;
+    if (particleCount > 10) {
+        const particles = document.querySelectorAll('.particle, .floating-element');
+        for (let i = 10; i < particles.length; i++) {
+            particles[i].style.display = 'none';
+        }
+    }
+}
+
+function initTouchGestures() {
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndX = e.changedTouches[0].clientX;
+        const diffY = touchStartY - touchEndY;
+        const diffX = touchStartX - touchEndX;
+
+        // Swipe detection
+        if (Math.abs(diffY) > Math.abs(diffX)) {
+            if (Math.abs(diffY) > 50) {
+                if (diffY > 0) {
+                    // Swipe up - scroll to next section
+                    scrollToNextSection();
+                } else {
+                    // Swipe down - scroll to previous section
+                    scrollToPreviousSection();
+                }
+            }
+        } else {
+            if (Math.abs(diffX) > 50) {
+                const navMenu = document.querySelector('.nav-menu');
+                if (diffX > 0 && navMenu.classList.contains('active')) {
+                    // Swipe left - close mobile menu
+                    navMenu.classList.remove('active');
+                    document.querySelector('.hamburger').classList.remove('active');
+                }
+            }
+        }
+    }, { passive: true });
+}
+
+function scrollToNextSection() {
+    const sections = document.querySelectorAll('section');
+    const currentScroll = window.pageYOffset;
+    
+    for (let i = 0; i < sections.length; i++) {
+        const sectionTop = sections[i].offsetTop - 100;
+        if (sectionTop > currentScroll) {
+            sections[i].scrollIntoView({ behavior: 'smooth' });
+            break;
+        }
+    }
+}
+
+function scrollToPreviousSection() {
+    const sections = document.querySelectorAll('section');
+    const currentScroll = window.pageYOffset;
+    
+    for (let i = sections.length - 1; i >= 0; i--) {
+        const sectionTop = sections[i].offsetTop - 100;
+        if (sectionTop < currentScroll - 100) {
+            sections[i].scrollIntoView({ behavior: 'smooth' });
+            break;
+        }
+    }
+}
+
+function improveMobileNavigation() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (hamburger && navMenu) {
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Close mobile menu when clicking on a nav link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Add touch feedback
+        hamburger.addEventListener('touchstart', function() {
+            this.style.opacity = '0.7';
+        }, { passive: true });
+
+        hamburger.addEventListener('touchend', function() {
+            this.style.opacity = '1';
+        }, { passive: true });
+    }
+}
+
+function optimizeAnimationsForMobile() {
+    // Disable heavy animations on mobile for better performance
+    const heavyAnimations = document.querySelectorAll('.shooting-star, .cursor-trail');
+    heavyAnimations.forEach(element => {
+        element.style.display = 'none';
+    });
+
+    // Reduce motion if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const animatedElements = document.querySelectorAll('*');
+        animatedElements.forEach(element => {
+            element.style.animation = 'none';
+            element.style.transition = 'none';
+        });
+    }
+}
+
+// Add mobile enhancements to the initialization
+document.addEventListener('DOMContentLoaded', function() {
+    // Add mobile enhancements
+    initMobileEnhancements();
+});
+
+// Handle orientation changes
+window.addEventListener('orientationchange', function() {
+    setTimeout(function() {
+        // Recalculate layouts after orientation change
+        window.scrollTo(0, window.pageYOffset);
+        
+        // Refresh any position-dependent elements
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            // Trigger reflow
+            section.style.display = 'none';
+            section.offsetHeight; // Trigger reflow
+            section.style.display = '';
+        });
+    }, 100);
+});
+
+// Optimize scroll performance on mobile
+let ticking = false;
+function updateOnScroll() {
+    // Throttle scroll events for better mobile performance
+    if (!ticking) {
+        requestAnimationFrame(function() {
+            // Add any scroll-dependent updates here
+            ticking = false;
+        });
+        ticking = true;
+    }
+}
+
+window.addEventListener('scroll', updateOnScroll, { passive: true });

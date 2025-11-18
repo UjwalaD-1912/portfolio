@@ -915,6 +915,9 @@ function initMobileEnhancements() {
         // Mobile-specific optimizations
         optimizeForMobile();
         
+        // Page-like mobile experience
+        initMobilePageExperience();
+        
         // Touch gestures
         initTouchGestures();
         
@@ -924,16 +927,161 @@ function initMobileEnhancements() {
         // Optimize animations for mobile
         optimizeAnimationsForMobile();
         
-        console.log('📱 Mobile enhancements activated');
+        // Mobile page indicators
+        initMobilePageIndicators();
+        
+        console.log('📱 Mobile page-like experience activated');
     }
+}// Mobile Page-Like Experience
+function initMobilePageExperience() {
+    // Enhanced smooth scrolling for mobile
+    let isScrolling = false;
+    
+    // Section visibility observer
+    const sections = document.querySelectorAll('section');
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '-20% 0px -20% 0px'
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                updatePageIndicator(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+
+    // Smooth section transitions
+    const smoothScrollToSection = (targetSection) => {
+        if (isScrolling) return;
+        isScrolling = true;
+
+        // Add transition overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'section-transition';
+        document.body.appendChild(overlay);
+
+        setTimeout(() => {
+            overlay.classList.add('active');
+        }, 10);
+
+        setTimeout(() => {
+            targetSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }, 200);
+
+        setTimeout(() => {
+            overlay.classList.remove('active');
+        }, 400);
+
+        setTimeout(() => {
+            document.body.removeChild(overlay);
+            isScrolling = false;
+        }, 800);
+    };
+
+    // Enhanced touch navigation
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    const touchThreshold = 50;
+    const timeThreshold = 300;
+
+    document.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndTime = Date.now();
+        const deltaY = touchStartY - touchEndY;
+        const deltaTime = touchEndTime - touchStartTime;
+
+        if (Math.abs(deltaY) > touchThreshold && deltaTime < timeThreshold) {
+            const currentSection = getCurrentSection();
+            if (deltaY > 0) {
+                // Swipe up - next section
+                const nextSection = getNextSection(currentSection);
+                if (nextSection) smoothScrollToSection(nextSection);
+            } else {
+                // Swipe down - previous section
+                const prevSection = getPreviousSection(currentSection);
+                if (prevSection) smoothScrollToSection(prevSection);
+            }
+        }
+    }, { passive: true });
+}
+
+function initMobilePageIndicators() {
+    // Create page indicators
+    const indicator = document.createElement('div');
+    indicator.className = 'mobile-page-indicator';
+    
+    const sections = document.querySelectorAll('section');
+    sections.forEach((section, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'page-dot';
+        dot.dataset.section = index;
+        
+        dot.addEventListener('click', () => {
+            section.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        indicator.appendChild(dot);
+    });
+    
+    document.body.appendChild(indicator);
+}
+
+function updatePageIndicator(activeSection) {
+    const sections = Array.from(document.querySelectorAll('section'));
+    const activeIndex = sections.indexOf(activeSection);
+    const dots = document.querySelectorAll('.page-dot');
+    
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+    });
+}
+
+function getCurrentSection() {
+    const sections = document.querySelectorAll('section');
+    const scrollPos = window.pageYOffset + window.innerHeight / 2;
+    
+    let currentSection = sections[0];
+    sections.forEach(section => {
+        if (section.offsetTop <= scrollPos) {
+            currentSection = section;
+        }
+    });
+    return currentSection;
+}
+
+function getNextSection(currentSection) {
+    const sections = Array.from(document.querySelectorAll('section'));
+    const currentIndex = sections.indexOf(currentSection);
+    return sections[currentIndex + 1] || null;
+}
+
+function getPreviousSection(currentSection) {
+    const sections = Array.from(document.querySelectorAll('section'));
+    const currentIndex = sections.indexOf(currentSection);
+    return sections[currentIndex - 1] || null;
 }
 
 function optimizeForMobile() {
     // Reduce animation complexity on mobile
     const animatedElements = document.querySelectorAll('[data-aos]');
     animatedElements.forEach(element => {
-        element.style.animationDuration = '0.3s';
-        element.style.transitionDuration = '0.3s';
+        element.style.animationDuration = '0.4s';
+        element.style.transitionDuration = '0.4s';
     });
 
     // Optimize images for mobile
@@ -945,9 +1093,9 @@ function optimizeForMobile() {
 
     // Reduce particle effects on mobile
     const particleCount = document.querySelectorAll('.particle, .floating-element').length;
-    if (particleCount > 10) {
+    if (particleCount > 5) {
         const particles = document.querySelectorAll('.particle, .floating-element');
-        for (let i = 10; i < particles.length; i++) {
+        for (let i = 5; i < particles.length; i++) {
             particles[i].style.display = 'none';
         }
     }
@@ -957,12 +1105,12 @@ function initTouchGestures() {
     let touchStartY = 0;
     let touchStartX = 0;
 
-    document.addEventListener('touchstart', function(e) {
+    document.addEventListener('touchstart', function (e) {
         touchStartY = e.touches[0].clientY;
         touchStartX = e.touches[0].clientX;
     }, { passive: true });
 
-    document.addEventListener('touchend', function(e) {
+    document.addEventListener('touchend', function (e) {
         const touchEndY = e.changedTouches[0].clientY;
         const touchEndX = e.changedTouches[0].clientX;
         const diffY = touchStartY - touchEndY;
@@ -995,7 +1143,7 @@ function initTouchGestures() {
 function scrollToNextSection() {
     const sections = document.querySelectorAll('section');
     const currentScroll = window.pageYOffset;
-    
+
     for (let i = 0; i < sections.length; i++) {
         const sectionTop = sections[i].offsetTop - 100;
         if (sectionTop > currentScroll) {
@@ -1008,7 +1156,7 @@ function scrollToNextSection() {
 function scrollToPreviousSection() {
     const sections = document.querySelectorAll('section');
     const currentScroll = window.pageYOffset;
-    
+
     for (let i = sections.length - 1; i >= 0; i--) {
         const sectionTop = sections[i].offsetTop - 100;
         if (sectionTop < currentScroll - 100) {
@@ -1021,31 +1169,99 @@ function scrollToPreviousSection() {
 function improveMobileNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
-    
+
     if (hamburger && navMenu) {
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
+        // Enhanced mobile menu animation
+        hamburger.addEventListener('click', function() {
+            const isActive = navMenu.classList.contains('active');
+            
+            if (!isActive) {
+                // Opening animation
+                navMenu.classList.add('active');
+                hamburger.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Animate nav links
+                const navLinks = navMenu.querySelectorAll('.nav-link');
+                navLinks.forEach((link, index) => {
+                    link.style.opacity = '0';
+                    link.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        link.style.transition = 'all 0.4s ease';
+                        link.style.opacity = '1';
+                        link.style.transform = 'translateY(0)';
+                    }, index * 100 + 200);
+                });
+            } else {
+                // Closing animation
+                const navLinks = navMenu.querySelectorAll('.nav-link');
+                navLinks.forEach((link, index) => {
+                    setTimeout(() => {
+                        link.style.opacity = '0';
+                        link.style.transform = 'translateY(-30px)';
+                    }, index * 50);
+                });
+                
+                setTimeout(() => {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    document.body.style.overflow = '';
+                }, navLinks.length * 50 + 200);
             }
         });
 
-        // Close mobile menu when clicking on a nav link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
-            });
+                document.body.style.overflow = '';
+            }
         });
 
-        // Add touch feedback
+        // Enhanced nav link interactions
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    // Close menu first
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
+                    // Smooth scroll to section with delay
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 300);
+                }
+            });
+
+            // Add touch effects
+            link.addEventListener('touchstart', function() {
+                this.style.transform = 'translateX(10px)';
+            }, { passive: true });
+
+            link.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            }, { passive: true });
+        });
+
+        // Enhanced touch feedback for hamburger
         hamburger.addEventListener('touchstart', function() {
-            this.style.opacity = '0.7';
+            this.style.transform = 'scale(0.9)';
+            this.style.opacity = '0.8';
         }, { passive: true });
 
         hamburger.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
             this.style.opacity = '1';
         }, { passive: true });
     }
@@ -1069,17 +1285,17 @@ function optimizeAnimationsForMobile() {
 }
 
 // Add mobile enhancements to the initialization
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Add mobile enhancements
     initMobileEnhancements();
 });
 
 // Handle orientation changes
-window.addEventListener('orientationchange', function() {
-    setTimeout(function() {
+window.addEventListener('orientationchange', function () {
+    setTimeout(function () {
         // Recalculate layouts after orientation change
         window.scrollTo(0, window.pageYOffset);
-        
+
         // Refresh any position-dependent elements
         const sections = document.querySelectorAll('section');
         sections.forEach(section => {
@@ -1096,7 +1312,7 @@ let ticking = false;
 function updateOnScroll() {
     // Throttle scroll events for better mobile performance
     if (!ticking) {
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
             // Add any scroll-dependent updates here
             ticking = false;
         });

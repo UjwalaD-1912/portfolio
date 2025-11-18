@@ -1810,6 +1810,12 @@ body.theme-dawn .navbar.scrolled {
     width: 24px;
 }
 
+.skill-item span {
+    color: #FF8C42;
+    font-weight: var(--font-weight-medium);
+    text-shadow: 0 0 8px rgba(255, 140, 66, 0.4);
+}
+
 /* Architecture Section */
 .architecture {
     padding: 80px 0;

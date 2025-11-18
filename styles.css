@@ -727,18 +727,15 @@ body.theme-dawn .hero-name {
     font-weight: var(--font-weight-bold);
     text-align: center;
     margin-bottom: var(--spacing-xxl);
-    color: #ffffff;
+    color: #0176D3;
     position: relative;
-    background: linear-gradient(135deg, #0176D3, #00A1E0, #FF6B35);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(1, 118, 211, 0.5), 0 0 40px rgba(0, 161, 224, 0.3);
+    text-shadow: 0 0 15px rgba(1, 118, 211, 0.8), 0 2px 4px rgba(0, 0, 0, 0.3);
     padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(1, 118, 211, 0.3);
     transition: all 0.3s ease;
     display: inline-block;
     transform: translateX(-50%);
@@ -748,31 +745,30 @@ body.theme-dawn .hero-name {
 .section-title:hover {
     transform: translateX(-50%) translateY(-5px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    color: #00A1E0;
+    text-shadow: 0 0 20px rgba(0, 161, 224, 1);
 }
 
-/* Theme-specific section title adjustments for fallback */
+/* Theme-specific section title adjustments */
 body.theme-day .section-title {
-    background: linear-gradient(135deg, #0176D3, #00A1E0, #FF6B35);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(1, 118, 211, 0.6);
+    color: #0176D3;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(1, 118, 211, 0.4);
+    text-shadow: 0 0 15px rgba(1, 118, 211, 0.9), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 body.theme-sunset .section-title {
-    background: linear-gradient(135deg, #FF6B35, #FF8C42, #0176D3);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+    color: #FF6B35;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 107, 53, 0.4);
+    text-shadow: 0 0 15px rgba(255, 107, 53, 0.9), 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 body.theme-dawn .section-title {
-    background: linear-gradient(135deg, #FF6B9D, #0176D3, #00A1E0);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
+    color: #FF6B9D;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 107, 157, 0.4);
+    text-shadow: 0 0 15px rgba(255, 107, 157, 0.9), 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .section-title::after {
@@ -1858,17 +1854,14 @@ body.theme-dawn .navbar.scrolled {
 .arch-category h3 {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: #ffffff;
-    background: linear-gradient(135deg, #FF6B35, #0176D3);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #FF6B35;
     margin-bottom: var(--spacing-lg);
-    text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.7), 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 107, 53, 0.2);
+    border: 2px solid rgba(255, 107, 53, 0.3);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
@@ -1922,19 +1915,16 @@ body.theme-dawn .navbar.scrolled {
 .category-title {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: #ffffff;
-    background: linear-gradient(135deg, #0176D3, #00A1E0);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #0176D3;
     margin-bottom: var(--spacing-xl);
     text-align: center;
     position: relative;
-    text-shadow: 0 0 10px rgba(1, 118, 211, 0.5);
+    text-shadow: 0 0 10px rgba(1, 118, 211, 0.7), 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(1, 118, 211, 0.2);
+    border: 2px solid rgba(1, 118, 211, 0.3);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
@@ -2132,13 +2122,9 @@ body.theme-dawn .navbar.scrolled {
 .timeline-content h3 {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: #ffffff;
-    background: linear-gradient(135deg, #0176D3, #FF6B35);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #0176D3;
     margin-bottom: var(--spacing-sm);
-    text-shadow: 0 0 8px rgba(1, 118, 211, 0.4);
+    text-shadow: 0 0 8px rgba(1, 118, 211, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .timeline-content h4 {
@@ -2280,13 +2266,9 @@ body.theme-dawn .navbar.scrolled {
 .project-content h3 {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: #ffffff;
-    background: linear-gradient(135deg, #FF6B35, #00A1E0);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #FF6B35;
     margin-bottom: var(--spacing-md);
-    text-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
+    text-shadow: 0 0 8px rgba(255, 107, 53, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .project-content p {
@@ -2448,13 +2430,9 @@ body.theme-dawn .navbar.scrolled {
 .certification-card h3 {
     font-size: 1.25rem;
     font-weight: var(--font-weight-bold);
-    color: #ffffff;
-    background: linear-gradient(135deg, #0176D3, #FF6B35, #00A1E0);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #0176D3;
     margin-bottom: var(--spacing-md);
-    text-shadow: 0 0 8px rgba(1, 118, 211, 0.4);
+    text-shadow: 0 0 8px rgba(1, 118, 211, 0.6), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .certification-card p {

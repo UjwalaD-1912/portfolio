@@ -3908,6 +3908,7 @@ body.theme-dawn .navbar.scrolled {
 
 /* ULTRA SMOOTH MOBILE OVERRIDE - Fixes fast animation issues */
 @media (max-width: 768px) {
+
     /* Force override all animations to be ultra-slow and smooth */
     * {
         animation-duration: 3s !important;
@@ -3940,7 +3941,7 @@ body.theme-dawn .navbar.scrolled {
     }
 
     /* Override content animations */
-    section .container > *,
+    section .container>*,
     .hero-content,
     .about-content,
     .skills-container,
@@ -3994,6 +3995,7 @@ body.theme-dawn .navbar.scrolled {
         0% {
             opacity: 0;
         }
+
         100% {
             opacity: 1;
         }
@@ -4125,7 +4127,8 @@ body.theme-dawn .navbar.scrolled {
     .form-group input,
     .form-group textarea {
         padding: 15px !important;
-        font-size: 16px !important; /* Prevents zoom on iOS */
+        font-size: 16px !important;
+        /* Prevents zoom on iOS */
     }
 
     /* Typography mobile fixes */
@@ -4165,7 +4168,8 @@ body.theme-dawn .navbar.scrolled {
 
     /* Additional mobile viewport fixes */
     .about-skills-preview {
-        display: none !important; /* Hide complex skills preview on mobile */
+        display: none !important;
+        /* Hide complex skills preview on mobile */
     }
 
     .timeline-item {
@@ -4210,12 +4214,97 @@ body.theme-dawn .navbar.scrolled {
         line-height: 1.6 !important;
     }
 
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
         line-height: 1.3 !important;
     }
 
     /* Mobile-specific background adjustments */
     .dynamic-background {
-        background-attachment: scroll !important; /* Better mobile performance */
+        background-attachment: scroll !important;
+        /* Better mobile performance */
+    }
+}
+
+/* HOME BUTTON - Scroll to Top */
+.home-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--sf-blue), var(--sf-blue-dark));
+    color: var(--sf-white);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(21, 137, 238, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.home-btn:hover {
+    background: linear-gradient(135deg, var(--sf-blue-dark), var(--sf-blue));
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(21, 137, 238, 0.6);
+}
+
+.home-btn:active {
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Theme-specific home button styling */
+body.theme-day .home-btn {
+    background: linear-gradient(135deg, #FF8C42, #FF6B35);
+    box-shadow: 0 4px 20px rgba(255, 140, 66, 0.4);
+}
+
+body.theme-day .home-btn:hover {
+    background: linear-gradient(135deg, #FF6B35, #FF8C42);
+    box-shadow: 0 8px 30px rgba(255, 140, 66, 0.6);
+}
+
+body.theme-sunset .home-btn {
+    background: linear-gradient(135deg, #FF6B35, #E55D75);
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+}
+
+body.theme-sunset .home-btn:hover {
+    background: linear-gradient(135deg, #E55D75, #FF6B35);
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+}
+
+body.theme-dawn .home-btn {
+    background: linear-gradient(135deg, #FF6B9D, #A29BFE);
+    box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+}
+
+body.theme-dawn .home-btn:hover {
+    background: linear-gradient(135deg, #A29BFE, #FF6B9D);
+    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.6);
+}
+
+/* Mobile home button adjustments */
+@media (max-width: 768px) {
+    .home-btn {
+        bottom: 20px !important;
+        right: 20px !important;
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.2rem !important;
     }
 }

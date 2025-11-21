@@ -935,17 +935,17 @@ function initMobileEnhancements() {
 function initSmoothMobileLoading() {
     // Simply ensure all sections are visible on mobile - no animations
     const sections = document.querySelectorAll('section');
-    
+
     sections.forEach((section, index) => {
         // Make everything immediately visible with no animations
         section.style.opacity = '1';
         section.style.transform = 'none';
         section.style.transition = 'none';
         section.classList.add('mobile-loaded');
-        
+
         // Remove any animation classes
         section.classList.remove('fade-in-up', 'slide-in', 'animate-in');
-        
+
         // Make content immediately visible
         const elements = section.querySelectorAll('*');
         elements.forEach(element => {
@@ -955,14 +955,14 @@ function initSmoothMobileLoading() {
             element.style.transition = 'none';
         });
     });
-    
+
     console.log('📱 Ultra-simple mobile experience activated - no animations');
 }
 
 // Simple Section Loading - No Animations
 function initProgressiveSectionLoading() {
     const sections = document.querySelectorAll('section');
-    
+
     // Simply make all sections immediately visible
     sections.forEach(section => {
         section.classList.add('visible');
@@ -1411,3 +1411,52 @@ function updateOnScroll() {
 }
 
 window.addEventListener('scroll', updateOnScroll, { passive: true });
+
+// HOME BUTTON FUNCTIONALITY
+function initHomeButton() {
+    const homeBtn = document.getElementById('homeBtn');
+    
+    if (homeBtn) {
+        // Show/hide home button based on scroll position
+        function toggleHomeButton() {
+            const scrollY = window.pageYOffset;
+            
+            if (scrollY > 300) {
+                homeBtn.classList.add('visible');
+            } else {
+                homeBtn.classList.remove('visible');
+            }
+        }
+
+        // Smooth scroll to top when clicked
+        homeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Add click animation
+            this.style.transform = 'translateY(-2px) scale(0.95)';
+            
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+
+            // Smooth scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Listen to scroll events
+        window.addEventListener('scroll', toggleHomeButton, { passive: true });
+        
+        // Initial check
+        toggleHomeButton();
+        
+        console.log('🏠 Home button initialized');
+    }
+}
+
+// Initialize home button on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initHomeButton();
+});

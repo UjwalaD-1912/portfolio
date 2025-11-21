@@ -1464,15 +1464,109 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // TIME AND CLIMATE FUNCTIONALITY
 function initTimeAndClimate() {
-    // Location coordinates for Toronto, ON
-    const TORONTO_LAT = 43.6532;
-    const TORONTO_LON = -79.3832;
+    let userLocation = {
+        city: 'Toronto',
+        region: 'ON', 
+        country: 'Canada',
+        timezone: 'America/Toronto',
+        lat: 43.6532,
+        lon: -79.3832
+    };
     
-    // Update time every second
+    // Try to get user's location
+    async function getUserLocation() {
+        try {
+            // First try to get user's geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        
+                        try {
+                            // Use reverse geocoding to get location name
+                            // Using ipapi.co as a backup for location detection
+                            const response = await fetch('https://ipapi.co/json/');
+                            const locationData = await response.json();
+                            
+                            userLocation = {
+                                city: locationData.city || 'Unknown',
+                                region: locationData.region || '',
+                                country: locationData.country_name || 'Unknown',
+                                timezone: locationData.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
+                                lat: lat,
+                                lon: lon
+                            };
+                            
+                            updateLocationDisplay();
+                            updateWeather();
+                            
+                        } catch (error) {
+                            console.log('Using coordinates without city name');
+                            userLocation.lat = lat;
+                            userLocation.lon = lon;
+                            userLocation.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                            updateLocationDisplay();
+                            updateWeather();
+                        }
+                    },
+                    () => {
+                        // If geolocation fails, try IP-based location
+                        getLocationFromIP();
+                    }
+                );
+            } else {
+                // Geolocation not supported, use IP-based location
+                getLocationFromIP();
+            }
+        } catch (error) {
+            console.log('Using default location (Toronto)');
+            updateLocationDisplay();
+            updateWeather();
+        }
+    }
+    
+    // Fallback: Get location from IP
+    async function getLocationFromIP() {
+        try {
+            const response = await fetch('https://ipapi.co/json/');
+            const locationData = await response.json();
+            
+            userLocation = {
+                city: locationData.city || 'Toronto',
+                region: locationData.region || 'ON',
+                country: locationData.country_name || 'Canada', 
+                timezone: locationData.timezone || 'America/Toronto',
+                lat: locationData.latitude || 43.6532,
+                lon: locationData.longitude || -79.3832
+            };
+            
+            updateLocationDisplay();
+            updateWeather();
+            
+        } catch (error) {
+            console.log('IP location failed, using Toronto as default');
+            updateLocationDisplay();
+            updateWeather();
+        }
+    }
+    
+    // Update location display
+    function updateLocationDisplay() {
+        const locationElement = document.querySelector('.location-info span');
+        if (locationElement) {
+            const locationText = userLocation.region ? 
+                `${userLocation.city}, ${userLocation.region}, ${userLocation.country}` :
+                `${userLocation.city}, ${userLocation.country}`;
+            locationElement.textContent = locationText;
+        }
+    }
+    
+    // Update time every second using user's timezone
     function updateTime() {
         const now = new Date();
         const timeOptions = {
-            timeZone: 'America/Toronto',
+            timeZone: userLocation.timezone,
             hour12: true,
             hour: '2-digit',
             minute: '2-digit',
@@ -1486,29 +1580,34 @@ function initTimeAndClimate() {
         }
     }
 
-    // Fetch weather data
+    // Fetch weather data based on user location
     async function updateWeather() {
         try {
-            // Using OpenWeatherMap API (free tier)
-            // Note: You may want to get your own API key for production
-            const API_KEY = 'demo'; // Replace with actual API key
-            const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${TORONTO_LAT}&lon=${TORONTO_LON}&appid=${API_KEY}&units=metric`;
+            // Try to get real weather data (you'll need an API key for production)
+            // For now, we'll simulate weather based on location
             
-            // For demo purposes, we'll simulate weather data
-            // In production, uncomment the fetch call below and get a real API key
+            // Simulate weather based on approximate location
+            let temperature, descriptions;
             
-            /*
-            const response = await fetch(API_URL);
-            const data = await response.json();
+            // Rough weather simulation based on latitude (seasonal approximation)
+            if (userLocation.lat > 50) {
+                // Northern regions - colder
+                temperature = Math.round(-5 + Math.random() * 15);
+                descriptions = ['Snow', 'Partly cloudy', 'Overcast', 'Light snow', 'Cold and clear'];
+            } else if (userLocation.lat > 35) {
+                // Temperate regions
+                temperature = Math.round(0 + Math.random() * 20);
+                descriptions = ['Clear sky', 'Partly cloudy', 'Overcast', 'Light rain', 'Cloudy'];
+            } else if (userLocation.lat > 0) {
+                // Tropical/subtropical regions
+                temperature = Math.round(15 + Math.random() * 20);
+                descriptions = ['Sunny', 'Partly cloudy', 'Humid', 'Scattered showers', 'Warm'];
+            } else {
+                // Southern hemisphere - opposite season
+                temperature = Math.round(10 + Math.random() * 25);
+                descriptions = ['Clear', 'Partly cloudy', 'Mild', 'Cool breeze', 'Pleasant'];
+            }
             
-            const temperature = Math.round(data.main.temp);
-            const description = data.weather[0].description;
-            const iconCode = data.weather[0].icon;
-            */
-            
-            // Simulated weather data for Toronto
-            const temperature = Math.round(-2 + Math.random() * 10); // Winter temperature range
-            const descriptions = ['Clear sky', 'Partly cloudy', 'Overcast', 'Light snow', 'Cloudy'];
             const description = descriptions[Math.floor(Math.random() * descriptions.length)];
             
             // Update temperature
@@ -1554,9 +1653,9 @@ function initTimeAndClimate() {
         }
     }
 
-    // Initialize time and weather
+    // Initialize everything
+    getUserLocation(); // This will trigger location detection
     updateTime();
-    updateWeather();
     
     // Update time every second
     setInterval(updateTime, 1000);
@@ -1564,5 +1663,5 @@ function initTimeAndClimate() {
     // Update weather every 10 minutes
     setInterval(updateWeather, 600000);
     
-    console.log('🌤️ Time and climate initialized for Toronto, ON');
+    console.log('🌤️ Time and climate initialized with location detection');
 }

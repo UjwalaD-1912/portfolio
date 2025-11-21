@@ -1415,12 +1415,12 @@ window.addEventListener('scroll', updateOnScroll, { passive: true });
 // HOME BUTTON FUNCTIONALITY
 function initHomeButton() {
     const homeBtn = document.getElementById('homeBtn');
-    
+
     if (homeBtn) {
         // Show/hide home button based on scroll position
         function toggleHomeButton() {
             const scrollY = window.pageYOffset;
-            
+
             if (scrollY > 300) {
                 homeBtn.classList.add('visible');
             } else {
@@ -1429,12 +1429,12 @@ function initHomeButton() {
         }
 
         // Smooth scroll to top when clicked
-        homeBtn.addEventListener('click', function(e) {
+        homeBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             // Add click animation
             this.style.transform = 'translateY(-2px) scale(0.95)';
-            
+
             setTimeout(() => {
                 this.style.transform = '';
             }, 150);
@@ -1448,16 +1448,16 @@ function initHomeButton() {
 
         // Listen to scroll events
         window.addEventListener('scroll', toggleHomeButton, { passive: true });
-        
+
         // Initial check
         toggleHomeButton();
-        
+
         console.log('🏠 Home button initialized');
     }
 }
 
 // Initialize home button on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initHomeButton();
     initTimeAndClimate();
 });
@@ -1466,13 +1466,13 @@ document.addEventListener('DOMContentLoaded', function() {
 function initTimeAndClimate() {
     let userLocation = {
         city: 'Toronto',
-        region: 'ON', 
+        region: 'ON',
         country: 'Canada',
         timezone: 'America/Toronto',
         lat: 43.6532,
         lon: -79.3832
     };
-    
+
     // Try to get user's location
     async function getUserLocation() {
         try {
@@ -1482,13 +1482,13 @@ function initTimeAndClimate() {
                     async (position) => {
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
-                        
+
                         try {
                             // Use reverse geocoding to get location name
                             // Using ipapi.co as a backup for location detection
                             const response = await fetch('https://ipapi.co/json/');
                             const locationData = await response.json();
-                            
+
                             userLocation = {
                                 city: locationData.city || 'Unknown',
                                 region: locationData.region || '',
@@ -1497,10 +1497,10 @@ function initTimeAndClimate() {
                                 lat: lat,
                                 lon: lon
                             };
-                            
+
                             updateLocationDisplay();
                             updateWeather();
-                            
+
                         } catch (error) {
                             console.log('Using coordinates without city name');
                             userLocation.lat = lat;
@@ -1525,46 +1525,48 @@ function initTimeAndClimate() {
             updateWeather();
         }
     }
-    
+
     // Fallback: Get location from IP
     async function getLocationFromIP() {
         try {
             const response = await fetch('https://ipapi.co/json/');
             const locationData = await response.json();
-            
+
             userLocation = {
                 city: locationData.city || 'Toronto',
                 region: locationData.region || 'ON',
-                country: locationData.country_name || 'Canada', 
+                country: locationData.country_name || 'Canada',
                 timezone: locationData.timezone || 'America/Toronto',
                 lat: locationData.latitude || 43.6532,
                 lon: locationData.longitude || -79.3832
             };
-            
+
             updateLocationDisplay();
             updateWeather();
-            
+
         } catch (error) {
             console.log('IP location failed, using Toronto as default');
             updateLocationDisplay();
             updateWeather();
         }
     }
-    
+
     // Update location display
     function updateLocationDisplay() {
         const locationElement = document.querySelector('.location-info span');
         if (locationElement) {
-            const locationText = userLocation.region ? 
+            const locationText = userLocation.region ?
                 `${userLocation.city}, ${userLocation.region}, ${userLocation.country}` :
                 `${userLocation.city}, ${userLocation.country}`;
             locationElement.textContent = locationText;
         }
     }
-    
-    // Update time every second using user's timezone
+
+    // Update time and date every second using user's timezone
     function updateTime() {
         const now = new Date();
+        
+        // Time options
         const timeOptions = {
             timeZone: userLocation.timezone,
             hour12: true,
@@ -1572,11 +1574,44 @@ function initTimeAndClimate() {
             minute: '2-digit',
             second: '2-digit'
         };
-        
-        const timeString = now.toLocaleTimeString('en-US', timeOptions);
-        const timeElement = document.getElementById('currentTime');
-        if (timeElement) {
-            timeElement.textContent = timeString;
+
+        // Date options
+        const dateOptions = {
+            timeZone: userLocation.timezone,
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+
+        try {
+            const timeString = now.toLocaleTimeString('en-US', timeOptions);
+            const dateString = now.toLocaleDateString('en-US', dateOptions);
+            
+            const timeElement = document.getElementById('currentTime');
+            const dateElement = document.getElementById('currentDate');
+            
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+            
+            if (dateElement) {
+                dateElement.textContent = dateString;
+            }
+            
+            console.log(`⏰ Updated time: ${timeString}, date: ${dateString}`);
+        } catch (error) {
+            console.error('Time update error:', error);
+            // Fallback to basic time display
+            const timeElement = document.getElementById('currentTime');
+            const dateElement = document.getElementById('currentDate');
+            
+            if (timeElement) {
+                timeElement.textContent = now.toLocaleTimeString();
+            }
+            if (dateElement) {
+                dateElement.textContent = now.toLocaleDateString();
+            }
         }
     }
 
@@ -1585,10 +1620,10 @@ function initTimeAndClimate() {
         try {
             // Try to get real weather data (you'll need an API key for production)
             // For now, we'll simulate weather based on location
-            
+
             // Simulate weather based on approximate location
             let temperature, descriptions;
-            
+
             // Rough weather simulation based on latitude (seasonal approximation)
             if (userLocation.lat > 50) {
                 // Northern regions - colder
@@ -1607,26 +1642,26 @@ function initTimeAndClimate() {
                 temperature = Math.round(10 + Math.random() * 25);
                 descriptions = ['Clear', 'Partly cloudy', 'Mild', 'Cool breeze', 'Pleasant'];
             }
-            
+
             const description = descriptions[Math.floor(Math.random() * descriptions.length)];
-            
+
             // Update temperature
             const tempElement = document.getElementById('currentTemp');
             if (tempElement) {
                 tempElement.textContent = `${temperature}°C`;
             }
-            
+
             // Update weather description
             const descElement = document.getElementById('weatherDesc');
             if (descElement) {
                 descElement.textContent = description;
             }
-            
+
             // Update weather icon based on description
             const iconElement = document.getElementById('weatherIcon');
             if (iconElement) {
                 let iconClass = 'fas fa-sun'; // default
-                
+
                 if (description.includes('cloud') || description.includes('overcast')) {
                     iconClass = 'fas fa-cloud';
                 } else if (description.includes('snow')) {
@@ -1636,32 +1671,39 @@ function initTimeAndClimate() {
                 } else if (description.includes('clear')) {
                     iconClass = 'fas fa-sun';
                 }
-                
+
                 iconElement.className = iconClass;
             }
-            
+
         } catch (error) {
             console.log('Weather data unavailable:', error);
             // Fallback display
             const tempElement = document.getElementById('currentTemp');
             const descElement = document.getElementById('weatherDesc');
             const iconElement = document.getElementById('weatherIcon');
-            
+
             if (tempElement) tempElement.textContent = '2°C';
             if (descElement) descElement.textContent = 'Partly cloudy';
             if (iconElement) iconElement.className = 'fas fa-cloud';
         }
     }
 
-    // Initialize everything
-    getUserLocation(); // This will trigger location detection
-    updateTime();
+    // Initialize everything immediately
+    console.log('🌤️ Initializing time and climate with location detection...');
     
+    // Set default display first
+    updateTime();
+    updateLocationDisplay();
+    updateWeather();
+    
+    // Then try to get user location
+    getUserLocation();
+
     // Update time every second
     setInterval(updateTime, 1000);
-    
+
     // Update weather every 10 minutes
     setInterval(updateWeather, 600000);
-    
-    console.log('🌤️ Time and climate initialized with location detection');
+
+    console.log('🌤️ Time and climate initialized successfully');
 }

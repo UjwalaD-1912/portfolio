@@ -892,6 +892,7 @@ body.theme-dawn .section-title {
 }
 
 .location-info,
+.date-info,
 .time-info,
 .weather-info {
     display: flex;
@@ -929,7 +930,8 @@ body.theme-night .time-climate-bar {
 /* Navigation */
 .navbar {
     position: fixed;
-    top: 40px; /* Adjusted to account for time-climate bar */
+    top: 40px;
+    /* Adjusted to account for time-climate bar */
     width: 100%;
     background: rgba(11, 13, 23, 0.95);
     backdrop-filter: blur(15px);
@@ -1056,7 +1058,8 @@ body.theme-dawn .navbar.scrolled {
 
 /* Hero Section */
 .hero {
-    padding: 160px 0 80px; /* Adjusted for time-climate bar + navbar */
+    padding: 160px 0 80px;
+    /* Adjusted for time-climate bar + navbar */
     background: transparent;
     min-height: 100vh;
     display: flex;
@@ -4291,7 +4294,7 @@ body.theme-dawn .navbar.scrolled {
     .location-info span {
         display: none !important;
     }
-    
+
     .time-climate-container {
         justify-content: center !important;
         gap: 20px !important;
@@ -4391,6 +4394,7 @@ body.theme-dawn .home-btn:hover {
     }
 
     .location-info,
+    .date-info,
     .time-info,
     .weather-info {
         gap: 4px !important;
@@ -4398,18 +4402,27 @@ body.theme-dawn .home-btn:hover {
     }
 
     .location-info span {
-        font-size: 0.6rem !important; /* Smaller text on mobile */
+        font-size: 0.6rem !important;
+        /* Smaller text on mobile */
+    }
+
+    .date-info span {
+        font-size: 0.6rem !important;
+        /* Smaller date text on mobile */
     }
 
     .weather-info #weatherDesc {
-        display: none !important; /* Hide weather description on mobile */
+        display: none !important;
+        /* Hide weather description on mobile */
     }
 
     .navbar {
-        top: 32px !important; /* Adjusted for smaller time-climate bar */
+        top: 32px !important;
+        /* Adjusted for smaller time-climate bar */
     }
 
     .hero {
-        padding: 120px 20px 60px !important; /* Adjusted for mobile */
+        padding: 120px 20px 60px !important;
+        /* Adjusted for mobile */
     }
 }

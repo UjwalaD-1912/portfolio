@@ -2971,7 +2971,7 @@ body.theme-dawn .navbar.scrolled {
 
 /* Smooth Mobile Experience */
 @media (max-width: 768px) {
-    
+
     /* Disable aggressive scroll snapping for smoother experience */
     html {
         scroll-behavior: smooth;
@@ -3002,25 +3002,25 @@ body.theme-dawn .navbar.scrolled {
     }
 
     /* Staggered content animations */
-    section .container > * {
+    section .container>* {
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    section.visible .container > *:nth-child(1) {
+    section.visible .container>*:nth-child(1) {
         animation: fadeInUp 1s ease-out 0.2s both;
     }
 
-    section.visible .container > *:nth-child(2) {
+    section.visible .container>*:nth-child(2) {
         animation: fadeInUp 1s ease-out 0.4s both;
     }
 
-    section.visible .container > *:nth-child(3) {
+    section.visible .container>*:nth-child(3) {
         animation: fadeInUp 1s ease-out 0.6s both;
     }
 
-    section.visible .container > *:nth-child(4) {
+    section.visible .container>*:nth-child(4) {
         animation: fadeInUp 1s ease-out 0.8s both;
     }
 
@@ -3273,9 +3273,11 @@ body.theme-dawn .navbar.scrolled {
             opacity: 0;
             transform: translateY(30px);
         }
+
         50% {
             opacity: 0.5;
         }
+
         100% {
             opacity: 1;
             transform: translateY(0);
@@ -3287,6 +3289,7 @@ body.theme-dawn .navbar.scrolled {
             opacity: 0;
             transform: translateY(25px);
         }
+
         100% {
             opacity: 1;
             transform: translateY(0);
@@ -3298,6 +3301,7 @@ body.theme-dawn .navbar.scrolled {
             opacity: 0;
             transform: translateX(-30px);
         }
+
         100% {
             opacity: 1;
             transform: translateX(0);
@@ -3309,6 +3313,7 @@ body.theme-dawn .navbar.scrolled {
             opacity: 0;
             transform: translateX(30px);
         }
+
         100% {
             opacity: 1;
             transform: translateX(0);
@@ -3320,6 +3325,7 @@ body.theme-dawn .navbar.scrolled {
             opacity: 0;
             transform: scale(0.9);
         }
+
         100% {
             opacity: 1;
             transform: scale(1);
@@ -3897,5 +3903,110 @@ body.theme-dawn .navbar.scrolled {
     100% {
         background-position: 0% 50%;
         filter: hue-rotate(360deg) saturate(1.2) brightness(1.0);
+    }
+}
+
+/* ULTRA SMOOTH MOBILE OVERRIDE - Fixes fast animation issues */
+@media (max-width: 768px) {
+    /* Force override all animations to be ultra-slow and smooth */
+    * {
+        animation-duration: 3s !important;
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+        transition-duration: 1.5s !important;
+        transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    /* Completely kill rainbow animation on mobile and use static gradient */
+    .hero-name,
+    .section-title {
+        animation: none !important;
+        background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 50%, #E55D75 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* Override section animations completely */
+    section {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        min-height: auto !important;
+        padding: 80px 20px !important;
+    }
+
+    /* Override content animations */
+    section .container > *,
+    .hero-content,
+    .about-content,
+    .skills-container,
+    .projects-grid,
+    .contact-content {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* Make navigation smoother */
+    .nav-menu {
+        transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    /* Smooth hover effects only */
+    .btn,
+    .project-card,
+    .skill-category {
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .btn:hover,
+    .project-card:hover,
+    .skill-category:hover {
+        transform: translateY(-3px) !important;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    /* Smooth scroll behavior only */
+    html {
+        scroll-behavior: smooth !important;
+    }
+
+    /* Kill all floating animations on mobile */
+    .floating-element,
+    .particle,
+    .shooting-star,
+    .cursor-trail {
+        animation: none !important;
+        display: none !important;
+    }
+
+    /* Simple fade for mobile loading */
+    body.mobile-device {
+        animation: simpleFadeIn 2s ease-out !important;
+    }
+
+    @keyframes simpleFadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* Override any JavaScript-added animations */
+    .fade-in-up,
+    .slide-in,
+    .animate-in,
+    .mobile-loaded {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
     }
 }

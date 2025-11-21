@@ -931,97 +931,56 @@ function initMobileEnhancements() {
     }
 }
 
-// Smooth Mobile Loading Experience
+// Ultra Simple Mobile Loading Experience
 function initSmoothMobileLoading() {
-    // Progressive loading of sections
+    // Simply ensure all sections are visible on mobile - no animations
     const sections = document.querySelectorAll('section');
     
-    // Set initial state for sections (except hero)
     sections.forEach((section, index) => {
-        if (index > 0) {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-        }
-    });
-
-    // Smooth scroll observer
-    let ticking = false;
-    
-    function updateSections() {
-        const scrollTop = window.pageYOffset;
-        const windowHeight = window.innerHeight;
+        // Make everything immediately visible with no animations
+        section.style.opacity = '1';
+        section.style.transform = 'none';
+        section.style.transition = 'none';
+        section.classList.add('mobile-loaded');
         
-        sections.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            const isVisible = rect.top < windowHeight * 0.8;
-            
-            if (isVisible && !section.classList.contains('mobile-loaded')) {
-                setTimeout(() => {
-                    section.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                    section.classList.add('mobile-loaded');
-                    
-                    // Animate section content
-                    animateSectionContent(section);
-                }, index * 150);
-            }
+        // Remove any animation classes
+        section.classList.remove('fade-in-up', 'slide-in', 'animate-in');
+        
+        // Make content immediately visible
+        const elements = section.querySelectorAll('*');
+        elements.forEach(element => {
+            element.style.opacity = '1';
+            element.style.transform = 'none';
+            element.style.animation = 'none';
+            element.style.transition = 'none';
         });
-        
-        ticking = false;
-    }
-
-    function onScroll() {
-        if (!ticking) {
-            requestAnimationFrame(updateSections);
-            ticking = true;
-        }
-    }
-
-    // Throttled scroll listener
-    window.addEventListener('scroll', onScroll, { passive: true });
+    });
     
-    // Initial check
-    setTimeout(updateSections, 100);
+    console.log('📱 Ultra-simple mobile experience activated - no animations');
 }
 
-// Progressive Section Loading
+// Simple Section Loading - No Animations
 function initProgressiveSectionLoading() {
     const sections = document.querySelectorAll('section');
     
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -5% 0px'
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-
+    // Simply make all sections immediately visible
     sections.forEach(section => {
-        sectionObserver.observe(section);
+        section.classList.add('visible');
+        section.style.opacity = '1';
+        section.style.transform = 'none';
     });
 }
 
-// Animate Section Content Smoothly
+// Simple Content Display - No Animations
 function animateSectionContent(section) {
     const elements = section.querySelectorAll('.section-title, .hero-name, .hero-content, .hero-buttons, .about-content, .skills-container, .projects-grid, .contact-content, .stat-item, .skill-card, .project-card');
-    
-    elements.forEach((element, index) => {
-        setTimeout(() => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            
-            setTimeout(() => {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, 50);
-        }, index * 100);
+
+    // Make all content immediately visible with no animations
+    elements.forEach((element) => {
+        element.style.opacity = '1';
+        element.style.transform = 'none';
+        element.style.transition = 'none';
+        element.style.animation = 'none';
     });
 }// Mobile Page-Like Experience
 function initMobilePageExperience() {
@@ -1365,48 +1324,41 @@ function optimizeAnimationsForMobile() {
         element.style.display = 'none';
     });
 
-    // Make all animations slower and smoother on mobile
+    // Ultra-gentle mobile experience - disable animations completely
     const style = document.createElement('style');
     style.textContent = `
         @media (max-width: 768px) {
-            /* Slower, smoother animations for mobile */
-            .hero-name {
-                animation-duration: 4s !important; /* Slower rainbow animation */
-                animation-timing-function: ease-in-out !important;
-            }
-            
+            /* Kill all animations on mobile for ultra-smooth experience */
+            .hero-name,
             .section-title {
-                animation-duration: 3s !important;
-                animation-timing-function: ease-in-out !important;
+                animation: none !important;
+                background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 50%, #E55D75 100%) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent !important;
+                background-clip: text !important;
             }
             
-            .fade-in-up {
-                animation: gentleSlideIn 1.2s ease-out !important;
+            /* No section animations */
+            section,
+            .fade-in-up,
+            .slide-in,
+            .animate-in {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
             }
             
-            .slide-in {
-                animation: gentleSlideIn 1.5s ease-out !important;
-            }
-            
-            /* Smooth transitions */
-            * {
-                transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-                transition-duration: 0.8s !important;
-            }
-            
-            /* Smooth scroll behavior */
+            /* Only allow smooth scrolling */
             html {
                 scroll-behavior: smooth !important;
             }
             
-            /* Page indicators animation */
-            .page-indicator {
-                transition: all 0.6s ease-in-out !important;
-            }
-            
-            /* Section transitions */
-            section {
-                transition: opacity 1s ease-in-out, transform 1s ease-in-out !important;
+            /* Gentle hover effects only */
+            .btn:hover,
+            .project-card:hover {
+                transform: translateY(-2px) !important;
+                transition: transform 0.5s ease !important;
             }
         }
     `;

@@ -1459,4 +1459,110 @@ function initHomeButton() {
 // Initialize home button on page load
 document.addEventListener('DOMContentLoaded', function() {
     initHomeButton();
+    initTimeAndClimate();
 });
+
+// TIME AND CLIMATE FUNCTIONALITY
+function initTimeAndClimate() {
+    // Location coordinates for Toronto, ON
+    const TORONTO_LAT = 43.6532;
+    const TORONTO_LON = -79.3832;
+    
+    // Update time every second
+    function updateTime() {
+        const now = new Date();
+        const timeOptions = {
+            timeZone: 'America/Toronto',
+            hour12: true,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        
+        const timeString = now.toLocaleTimeString('en-US', timeOptions);
+        const timeElement = document.getElementById('currentTime');
+        if (timeElement) {
+            timeElement.textContent = timeString;
+        }
+    }
+
+    // Fetch weather data
+    async function updateWeather() {
+        try {
+            // Using OpenWeatherMap API (free tier)
+            // Note: You may want to get your own API key for production
+            const API_KEY = 'demo'; // Replace with actual API key
+            const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${TORONTO_LAT}&lon=${TORONTO_LON}&appid=${API_KEY}&units=metric`;
+            
+            // For demo purposes, we'll simulate weather data
+            // In production, uncomment the fetch call below and get a real API key
+            
+            /*
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            
+            const temperature = Math.round(data.main.temp);
+            const description = data.weather[0].description;
+            const iconCode = data.weather[0].icon;
+            */
+            
+            // Simulated weather data for Toronto
+            const temperature = Math.round(-2 + Math.random() * 10); // Winter temperature range
+            const descriptions = ['Clear sky', 'Partly cloudy', 'Overcast', 'Light snow', 'Cloudy'];
+            const description = descriptions[Math.floor(Math.random() * descriptions.length)];
+            
+            // Update temperature
+            const tempElement = document.getElementById('currentTemp');
+            if (tempElement) {
+                tempElement.textContent = `${temperature}°C`;
+            }
+            
+            // Update weather description
+            const descElement = document.getElementById('weatherDesc');
+            if (descElement) {
+                descElement.textContent = description;
+            }
+            
+            // Update weather icon based on description
+            const iconElement = document.getElementById('weatherIcon');
+            if (iconElement) {
+                let iconClass = 'fas fa-sun'; // default
+                
+                if (description.includes('cloud') || description.includes('overcast')) {
+                    iconClass = 'fas fa-cloud';
+                } else if (description.includes('snow')) {
+                    iconClass = 'fas fa-snowflake';
+                } else if (description.includes('rain')) {
+                    iconClass = 'fas fa-cloud-rain';
+                } else if (description.includes('clear')) {
+                    iconClass = 'fas fa-sun';
+                }
+                
+                iconElement.className = iconClass;
+            }
+            
+        } catch (error) {
+            console.log('Weather data unavailable:', error);
+            // Fallback display
+            const tempElement = document.getElementById('currentTemp');
+            const descElement = document.getElementById('weatherDesc');
+            const iconElement = document.getElementById('weatherIcon');
+            
+            if (tempElement) tempElement.textContent = '2°C';
+            if (descElement) descElement.textContent = 'Partly cloudy';
+            if (iconElement) iconElement.className = 'fas fa-cloud';
+        }
+    }
+
+    // Initialize time and weather
+    updateTime();
+    updateWeather();
+    
+    // Update time every second
+    setInterval(updateTime, 1000);
+    
+    // Update weather every 10 minutes
+    setInterval(updateWeather, 600000);
+    
+    console.log('🌤️ Time and climate initialized for Toronto, ON');
+}

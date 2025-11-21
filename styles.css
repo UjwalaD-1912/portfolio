@@ -4009,4 +4009,213 @@ body.theme-dawn .navbar.scrolled {
         transform: none !important;
         transition: none !important;
     }
+
+    /* FIX SALESFORCE ECOSYSTEM FOR MOBILE */
+    .salesforce-ecosystem {
+        height: 250px !important;
+        padding: 20px !important;
+        margin: 0 10px !important;
+        border-radius: 15px !important;
+    }
+
+    .central-hub {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.5rem !important;
+        animation: none !important;
+    }
+
+    .hub-glow {
+        width: 80px !important;
+        height: 80px !important;
+        animation: none !important;
+    }
+
+    /* Hide complex animations on mobile */
+    .orbit,
+    .skill-icon,
+    .salesforce-tower,
+    .data-flow-container,
+    .lightning-bolt,
+    .data-stream {
+        display: none !important;
+    }
+
+    /* Simplify about content layout */
+    .about-content {
+        display: block !important;
+        gap: 20px !important;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        margin-top: 30px !important;
+    }
+
+    /* Hero section mobile fixes */
+    .hero-container {
+        display: block !important;
+        text-align: center !important;
+        padding: 0 20px !important;
+    }
+
+    .hero-avatar {
+        width: 200px !important;
+        height: 200px !important;
+        margin: 0 auto 30px !important;
+    }
+
+    .hero-buttons {
+        justify-content: center !important;
+        gap: 15px !important;
+    }
+
+    .btn {
+        padding: 12px 20px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Skills section mobile fixes */
+    .skills-container {
+        padding: 0 !important;
+    }
+
+    .skill-category {
+        margin-bottom: 20px !important;
+        padding: 20px 15px !important;
+    }
+
+    /* Projects section mobile fixes */
+    .projects-grid {
+        display: block !important;
+        gap: 20px !important;
+    }
+
+    .project-card {
+        margin-bottom: 20px !important;
+        padding: 20px !important;
+    }
+
+    /* Navigation mobile fixes */
+    .nav-container {
+        padding: 0 20px !important;
+    }
+
+    .nav-menu.active {
+        left: 0 !important;
+        background: rgba(11, 13, 23, 0.98) !important;
+    }
+
+    .nav-link {
+        font-size: 1.2rem !important;
+        padding: 15px 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Contact form mobile fixes */
+    .contact-content {
+        display: block !important;
+    }
+
+    .contact-form {
+        margin-top: 30px !important;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 15px !important;
+        font-size: 16px !important; /* Prevents zoom on iOS */
+    }
+
+    /* Typography mobile fixes */
+    .hero-name {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 15px !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem !important;
+        margin-bottom: 20px !important;
+    }
+
+    .section-title {
+        font-size: 2rem !important;
+        margin-bottom: 30px !important;
+        left: 0 !important;
+        transform: none !important;
+        display: block !important;
+        text-align: center !important;
+    }
+
+    /* Padding and spacing fixes */
+    section {
+        padding: 60px 20px !important;
+    }
+
+    .hero {
+        padding: 100px 20px 60px !important;
+    }
+
+    .container {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+
+    /* Additional mobile viewport fixes */
+    .about-skills-preview {
+        display: none !important; /* Hide complex skills preview on mobile */
+    }
+
+    .timeline-item {
+        padding-left: 0 !important;
+        border-left: none !important;
+    }
+
+    .timeline::before {
+        display: none !important;
+    }
+
+    .timeline-marker {
+        position: relative !important;
+        left: 0 !important;
+        margin: 0 auto 15px !important;
+    }
+
+    .certification-card,
+    .project-card {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 10px !important;
+    }
+
+    /* Ensure proper touch targets */
+    .btn,
+    .nav-link,
+    .social-link {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+
+    /* Fix any overflow issues */
+    body,
+    html {
+        overflow-x: hidden !important;
+    }
+
+    /* Better mobile typography */
+    p,
+    li {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+    }
+
+    h1, h2, h3 {
+        line-height: 1.3 !important;
+    }
+
+    /* Mobile-specific background adjustments */
+    .dynamic-background {
+        background-attachment: scroll !important; /* Better mobile performance */
+    }
 }

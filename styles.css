@@ -2969,12 +2969,12 @@ body.theme-dawn .navbar.scrolled {
     }
 }
 
-/* Mobile Page-Like Experience */
+/* Smooth Mobile Experience */
 @media (max-width: 768px) {
-    /* Smooth scrolling and page-like sections */
+    
+    /* Disable aggressive scroll snapping for smoother experience */
     html {
         scroll-behavior: smooth;
-        scroll-snap-type: y mandatory;
     }
 
     body {
@@ -2982,17 +2982,46 @@ body.theme-dawn .navbar.scrolled {
         -webkit-overflow-scrolling: touch;
     }
 
-    /* Full-screen sections for mobile */
+    /* Smooth section loading with proper spacing */
     section {
         min-height: 100vh;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 60px 0;
+        padding: 80px var(--spacing-lg) 60px;
         position: relative;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Smooth section reveal animation */
+    section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Staggered content animations */
+    section .container > * {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    section.visible .container > *:nth-child(1) {
+        animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    section.visible .container > *:nth-child(2) {
+        animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    section.visible .container > *:nth-child(3) {
+        animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    section.visible .container > *:nth-child(4) {
+        animation: fadeInUp 1s ease-out 0.8s both;
     }
 
     /* Mobile Navigation */
@@ -3076,13 +3105,15 @@ body.theme-dawn .navbar.scrolled {
         background: var(--sf-orange);
     }
 
-    /* Hero Section - Full Screen */
+    /* Hero Section - Smooth Loading */
     .hero {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 0 var(--spacing-lg);
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .hero-container {
@@ -3090,30 +3121,38 @@ body.theme-dawn .navbar.scrolled {
         text-align: center;
         gap: var(--spacing-xl);
         max-width: 100%;
-        animation: fadeInUp 0.8s ease-out;
     }
 
+    /* Smooth hero name animation */
     .hero-name {
-        font-size: 2.8rem;
-        line-height: 1.1;
+        font-size: 2.5rem;
+        line-height: 1.2;
         margin-bottom: var(--spacing-lg);
-        animation: slideInFromLeft 1s ease-out 0.2s both;
+        opacity: 0;
+        transform: translateY(40px);
+        animation: gentleSlideIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
     }
 
+    /* Smooth hero content animation */
     .hero-content {
         font-size: 1.1rem;
         line-height: 1.6;
         max-width: 100%;
         margin-bottom: var(--spacing-xl);
-        animation: slideInFromRight 1s ease-out 0.4s both;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: gentleSlideIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s both;
     }
 
+    /* Smooth hero buttons animation */
     .hero-buttons {
         justify-content: center;
         flex-direction: column;
         align-items: center;
         gap: var(--spacing-lg);
-        animation: fadeInUp 1s ease-out 0.6s both;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: gentleSlideIn 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.3s both;
     }
 
     .btn {
@@ -3123,7 +3162,7 @@ body.theme-dawn .navbar.scrolled {
         font-size: 1rem;
         font-weight: 500;
         border-radius: 50px;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         transform: translateY(0);
     }
 
@@ -3228,37 +3267,62 @@ body.theme-dawn .navbar.scrolled {
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     }
 
-    /* Mobile page transition animations */
-    @keyframes fadeInUp {
-        from {
+    /* Smooth Mobile Animations */
+    @keyframes gentleSlideIn {
+        0% {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
         }
-        to {
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+        100% {
             opacity: 1;
             transform: translateY(0);
         }
     }
 
     @keyframes slideInFromLeft {
-        from {
+        0% {
             opacity: 0;
-            transform: translateX(-50px);
+            transform: translateX(-30px);
         }
-        to {
+        100% {
             opacity: 1;
             transform: translateX(0);
         }
     }
 
     @keyframes slideInFromRight {
-        from {
+        0% {
             opacity: 0;
-            transform: translateX(50px);
+            transform: translateX(30px);
         }
-        to {
+        100% {
             opacity: 1;
             transform: translateX(0);
+        }
+    }
+
+    @keyframes smoothScale {
+        0% {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
         }
     }
 
